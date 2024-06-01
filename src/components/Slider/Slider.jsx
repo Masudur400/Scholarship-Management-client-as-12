@@ -18,8 +18,8 @@ const Slider = ({image,text}) => {
               </h1>
               <br /> 
               <div className="flex gap-5 justify-center">
-              <Link to='/allScholarShip'><button className="flex items-center gap-2  bg-yellow-600 hover:bg-yellow-700 border-white border font-bold px-4 py-2 text-white rounded-md">Explore Now <FaArrowRight></FaArrowRight></button></Link>
-              {/* <Link to='/allBooks'><button className="flex items-center gap-2  bg-yellow-600 hover:bg-yellow-700 border-white border font-bold px-4 py-2 text-white rounded-md">All Books <FaArrowRight></FaArrowRight></button></Link> */}
+              <Link to='/allScholarShip'><button className="flex items-center gap-2  bg-yellow-600 hover:bg-yellow-700 border-white border font-bold px-4 py-2 text-white rounded-md">Apply Now <FaArrowRight></FaArrowRight></button></Link>
+               
               </div>
             </div>
           </div>

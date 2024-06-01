@@ -14,13 +14,13 @@ const NavBar = () => {
         <li><a>Item 3</a></li>
     </>
 
-    
+
 
     const handleLogOut = () => {
         logOut()
             .then()
             .catch()
-    } 
+    }
 
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
 
@@ -39,14 +39,16 @@ const NavBar = () => {
     }, [theme]);
 
 
-// profile links
+    // profile links
     const profileLinks = <>
-    {user && <li><p className="font-bold">{user?.displayName}</p></li>}
-    <div className="divider my-0"></div>
+        {user && <div><li><p className="font-bold flex justify-center items-center">{user?.displayName}</p></li>
+            <li><p className="flex justify-center items-center">{user?.email}</p></li>
+        </div>}
+        <div className="divider my-0"></div>
 
-    <li><Link to="/profile">Profile</Link></li>
-    <li><p onClick={handleLogOut} className="flex font-bold">Logout <MdLogout></MdLogout></p></li>
-</>
+        <li><Link to="/profile">Profile</Link></li>
+        <li><p onClick={handleLogOut} className="flex font-bold">Logout <MdLogout></MdLogout></p></li>
+    </>
 
     return (
         <div className="shadow-lg fixed z-10 w-full top-0 px-4">
@@ -60,7 +62,7 @@ const NavBar = () => {
                             {links}
                         </ul>
                     </div>
-                     
+
                     <img className="w-20 h-10 md:12 border-yellow-600 md:border rounded-full md:w-32 ml-2 md:ml-4 " src={logo} alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -92,7 +94,7 @@ const NavBar = () => {
                             </div>
 
                             : <div className="flex gap-2 md:gap-4">
-                                <Link to='/login' className="btn bg-yellow-600 hover:bg-yellow-700 text-white max-sm:btn-xs font-bold ">Login</Link> 
+                                <Link to='/login' className="btn bg-yellow-600 hover:bg-yellow-700 text-white max-sm:btn-xs font-bold ">Login</Link>
                             </div>
                     }
 
