@@ -15,6 +15,9 @@ import Register from './components/Register/Register';
 import AllScolarShip from './components/AllScolarShip/AllScolarShip';
 import Profile from './components/Profile/Profile';
 import UpdateProfile from './components/UpdateProfile/UpdateProfile';
+import DashBoard from './dashBoard/DashBoard/DashBoard';
+import ManageUsers from './dashBoard/ManageUsers/ManageUsers';
+import DashBoardProfile from './dashBoard/DashBoardProfile/DashBoardProfile';
 
 
 const router = createBrowserRouter([
@@ -49,6 +52,25 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path:'dashboard',
+    element:<DashBoard></DashBoard>,
+    children:[
+      
+      {
+        path:'dashboardProfile',
+        element:<DashBoardProfile></DashBoardProfile>
+      },
+      // admin routes 
+      {
+        path: 'users',
+        element:<ManageUsers></ManageUsers>
+      },
+
+// moderator routes 
+
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
