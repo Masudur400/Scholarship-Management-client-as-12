@@ -24,6 +24,7 @@ import UpdateProfile from './components/UpdateProfile/UpdateProfile';
 import DashBoard from './dashBoard/DashBoard/DashBoard';
 import ManageUsers from './dashBoard/ManageUsers/ManageUsers';
 import DashBoardProfile from './dashBoard/DashBoardProfile/DashBoardProfile';
+import AddScholarShip from './dashBoard/AddScholarship/AddScholarShip';
 
 
 const router = createBrowserRouter([
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
         path: 'users',
         element:<ManageUsers></ManageUsers>
       },
+      {
+        path:'addScholarship',
+        element:<AddScholarShip></AddScholarShip>
+      }
 
 // moderator routes 
 

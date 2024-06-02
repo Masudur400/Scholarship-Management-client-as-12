@@ -47,7 +47,7 @@ const NavBar = () => {
         <div className="divider my-0"></div>
 
         <li><Link to="/profile">Profile</Link></li>
-        <li><Link to="/dashboard/dashboardProfile">DashBoard</Link></li>
+        <li><Link to="/dashboard/dashboardProfile">DashBoard</Link></li> 
         <li><p onClick={handleLogOut} className="flex font-bold">Logout <MdLogout></MdLogout></p></li>
     </>
 

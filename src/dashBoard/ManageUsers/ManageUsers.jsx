@@ -46,6 +46,10 @@ const ManageUsers = () => {
 
     }
 
+    const handleUpdateRole= user =>{
+        
+    }
+
 
     return (
         <div className="my-10">
@@ -84,7 +88,7 @@ const ManageUsers = () => {
                                         {user?.role}
                                     </td>
                                     <td>
-                                        <button  className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button>
+                                        <button onClick={()=>handleUpdateRole(user)} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button>
                                     </td>
                                     <td>
                                         <button onClick={()=>handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
