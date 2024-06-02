@@ -5,6 +5,7 @@ import useAuth from "../Hooks/useAuth";
 import { useState } from "react";
 import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa"; 
 import { updateProfile } from "firebase/auth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
  
 
@@ -12,6 +13,8 @@ import { updateProfile } from "firebase/auth";
 // const imageHostingApi =`https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 
 const Register = () => {
+
+    const axiosPublic = useAxiosPublic()
 
     const [showPassword, setShowPassword] = useState(false);
     const [emailError, setEmailError] = useState('');
@@ -49,18 +52,29 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user)
-                if (result.user) {
-                    Swal.fire({
-                        title: "Success!",
-                        text: "Register successfully!",
-                        icon: "success"
-                    });
-                }
+                // if (result.user) {
+                    
+                // }
                 updateProfile(result.user, {
                     displayName: name,
                     photoURL: photo
                 })
-                    .then()
+                    .then(()=>{
+                        const userInfo ={
+                            name: name,
+                            email:email
+                        }
+                        axiosPublic.post('/users', userInfo)
+                        .then(res =>{
+                            if(res.data.insertedId){
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: "Register successfully!",
+                                    icon: "success"
+                                });
+                            }
+                        })
+                    })
                     .catch(error => {
                         console.log(error)
                     })
@@ -81,6 +95,12 @@ const Register = () => {
         googleLogin()
             .then(result => {
                 console.log(result)
+
+                const userInfo={
+                    email:result.user?.email,
+                    name:result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
                 if (result.user) {
                     Swal.fire({
                         title: "Success!",

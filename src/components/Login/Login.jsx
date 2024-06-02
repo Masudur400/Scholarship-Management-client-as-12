@@ -4,11 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
  
 const Login = () => {
     const { login, googleLogin } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
+    const axiosPublic = useAxiosPublic()
 
     const navigate = useNavigate()
     const location = useLocation();
@@ -43,6 +45,12 @@ const Login = () => {
         googleLogin()
             .then(result => {
                 console.log(result)
+
+                const userInfo={
+                    email:result.user?.email,
+                    name:result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
                 if (result.user) {
                     Swal.fire({
                         title: "Success!",
