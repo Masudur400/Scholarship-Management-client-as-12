@@ -26,11 +26,27 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 if (result.user) {
-                    Swal.fire({
-                        title: "Success!",
-                        text: "Login successfully!",
-                        icon: "success"
-                    });
+                    // Swal.fire({
+                    //     title: "Success!",
+                    //     text: "Login successfully!",
+                    //     icon: "success"
+                    // });
+                    const userInfo ={
+                        name:result.user?.displayName,
+                        email:email,
+                        role:'user',
+                        image:result.user?.photoURL
+                    }
+                    axiosPublic.post('/users', userInfo)
+                    .then(res =>{
+                        if(res.data.insertedId){
+                            Swal.fire({
+                                title: "Success!",
+                                text: "Login successfully!",
+                                icon: "success"
+                            });
+                        }
+                    })
                 }
 
                 navigate(location?.state ? location.state : '/')
