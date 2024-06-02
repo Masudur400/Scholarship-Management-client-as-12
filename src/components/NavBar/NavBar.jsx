@@ -84,7 +84,7 @@ const NavBar = () => {
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button"  >
                                     <div>
-                                        <img className="max-sm:h-10 max-sm:w-10 w-12 h-12 border rounded-full bg-white" alt="user image" referrerPolicy="no-referrer" src={user?.photoURL}
+                                        <img className="max-sm:h-10 max-sm:w-10 w-12 h-12 border rounded-full bg-white border-black" alt="user image" referrerPolicy="no-referrer" src={user?.photoURL}
                                         />
                                     </div>
                                 </div>

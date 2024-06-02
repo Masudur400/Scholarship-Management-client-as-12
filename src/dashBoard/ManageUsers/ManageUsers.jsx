@@ -67,7 +67,7 @@ const ManageUsers = () => {
             </Helmet>
             <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-5">Manage Users</h3>
             <div>
-                <div className="overflow-x-auto shadow-xl bg-slate-200 m-5 min-h-screen rounded-md">
+                <div className="overflow-x-auto shadow-2xl  m-5 min-h-screen rounded-md">
                     <table className="table">
                         {/* head */}
                         <thead>

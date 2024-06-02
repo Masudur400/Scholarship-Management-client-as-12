@@ -79,7 +79,8 @@ const AddScholarShip = () => {
             <Helmet>
                 <title>SM || Add Scholarship</title>
             </Helmet>
-            <div className="w-4/5 p-5 mx-auto bg-slate-100">
+            <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-3">Add Scholarship</h3>
+            <div className="w-4/5 p-5 mx-auto shadow-2xl border rounded-md">
                 <form onSubmit={handleAddScholarship}>
                     <div className="grid md:grid-cols-2 gap-2">
                         <div>

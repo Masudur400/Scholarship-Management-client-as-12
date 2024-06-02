@@ -10,7 +10,7 @@ const DashBoard = () => {
         <li><NavLink to="/dashboard/users" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Manage Users</NavLink></li>
         <li><NavLink to="/dashboard/addScholarship" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Add Scholarship</NavLink></li>
 
-<div className="divider my-2"></div>
+<div className="  my-2 border-b-2 border-black"></div>
 
         <li><NavLink to="/" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 font-bold btn btn-sm border-none' : ''} ><FaHome></FaHome> Home</NavLink></li>
         
