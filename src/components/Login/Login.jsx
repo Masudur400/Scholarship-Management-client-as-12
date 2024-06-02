@@ -48,7 +48,9 @@ const Login = () => {
 
                 const userInfo={
                     email:result.user?.email,
-                    name:result.user?.displayName
+                    name:result.user?.displayName,
+                    role:'user',
+                    image:result.user?.photoURL
                 }
                 axiosPublic.post('/users', userInfo)
                 if (result.user) {
