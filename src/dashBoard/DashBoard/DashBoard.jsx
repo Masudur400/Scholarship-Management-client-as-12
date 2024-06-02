@@ -25,7 +25,7 @@ const DashBoard = () => {
                 {links}
                 </ul>
             </div>
-            <div className="flex-1 w-full">
+            <div className="  w-full">
                 <Outlet></Outlet>
             </div>
         </div>
