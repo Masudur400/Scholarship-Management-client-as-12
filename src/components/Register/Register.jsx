@@ -9,8 +9,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 
  
 
-// const imageHostingKey = import.meta.env.VITE_image_hosting_key;
-// const imageHostingApi =`https://api.imgbb.com/1/upload?key=${imageHostingKey}`
+
 
 const Register = () => {
 

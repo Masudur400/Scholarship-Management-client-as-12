@@ -9,7 +9,7 @@ const ManageUsers = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const { data: users = [],refetch } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -17,7 +17,7 @@ const ManageUsers = () => {
         }
     })
 
-    const handleDelete = user =>{
+    const handleDelete = user => {
 
         Swal.fire({
             title: "Are you sure?",
@@ -34,11 +34,11 @@ const ManageUsers = () => {
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch()
-                              Swal.fire({
+                            Swal.fire({
                                 title: "Deleted!",
                                 text: ` ${user?.name} has been deleted.`,
                                 icon: "success"
-                              });
+                            });
                         }
                     })
             }
@@ -46,9 +46,17 @@ const ManageUsers = () => {
 
     }
 
-    const handleUpdateRole= user =>{
-        
+    const handleUpdateRole = e =>{
+        e.preventDefault()
+        const role = e.target.role 
+        console.log(role)
+
     }
+
+
+    {/* Open the modal using document.getElementById('ID').showModal() method */ }
+
+
 
 
     return (
@@ -88,13 +96,32 @@ const ManageUsers = () => {
                                         {user?.role}
                                     </td>
                                     <td>
-                                        <button onClick={()=>handleUpdateRole(user)} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button>
+                                        {/* <button onClick={()=>handleUpdateRole(user)} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button> */}
+                                        <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /></button>
                                     </td>
                                     <td>
-                                        <button onClick={()=>handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
+                                        <button onClick={() => handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
                                     </td>
                                 </tr>)
                             }
+                            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                                <div className="modal-box">
+                                <select name='role' className="border-2 rounded-md w-full px-4 py-2 mb-2">
+                                <option disabled selected>Select One</option>
+                                <option value="admin">admin</option>
+                                <option value="moderator">moderator</option>
+                                <option value="user">user</option>
+                            </select>
+                                    <div className="modal-action">
+                                        <form method="dialog">
+                                            {/* if there is a button in form, it will close the modal */}
+                                            <button className="btn">Close</button>
+                                            <button onClick={handleUpdateRole}  className="btn">Confirm</button>
+                                             
+                                        </form>
+                                    </div>
+                                </div>
+                            </dialog>
 
                         </tbody>
                     </table>

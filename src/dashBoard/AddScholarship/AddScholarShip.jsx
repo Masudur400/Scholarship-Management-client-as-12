@@ -1,45 +1,87 @@
-import useAuth from "../../components/Hooks/useAuth";
+ import axios from 'axios';
+import useAuth from '../../components/Hooks/useAuth';
+import useAxiosPublic from '../../components/Hooks/useAxiosPublic';
+
+const imageHostingKey = import.meta.env.VITE_image_hosting_key;
+const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const AddScholarShip = () => {
-
     const { user } = useAuth();
+    const axiosPublic = useAxiosPublic();
 
+    const handleAddScholarship = async (e) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const scholarshipName = form.get('scholarshipName');
+        const universityName = form.get('universityName');
+        const universityCountry = form.get('universityCountry');
+        const universityCity = form.get('universityCity');
+        const universityWorldRank = form.get('universityWorldRank');
+        const subjectCategory = form.get('subjectCategory');
+        const scholarshipCategory = form.get('scholarshipCategory');
+        const degree = form.get('degree');
+        const applicationFees = form.get('applicationFees');
+        const serviceCharge = form.get('serviceCharge');
+        const postDate = form.get('postDate');
+        const applicationDeadline = form.get('applicationDeadline');
+        const postedUserEmail = user?.email;
+        const imageFile = form.get('image');
 
-    const handleAddScholarship = e => {
-        e.preventDefault()
-        const form = new FormData(e.currentTarget)
-        const scholarshipName = form.get('scholarshipName')
-        const universityName = form.get('universityName')
-        const universityCountry = form.get('universityCountry')
-        const universityCity = form.get('universityCity')
-        const universityWorldRank = form.get('universityWorldRank')
-        const subjectCategory = form.get('subjectCategory')
-        const scholarshipCategory = form.get('scholarshipCategory')
-        const degree = form.get('degree')
-        const applicationFees = form.get('applicationFees')
-        const serviceCharge = form.get('serviceCharge')
+        try {
+            const imageData = new FormData();
+            imageData.append('image', imageFile);
 
-        const data = {scholarshipName,universityCity,universityCountry,universityName,universityWorldRank,subjectCategory,scholarshipCategory,degree,applicationFees,serviceCharge}
-        console.table(data)
-         
-    }
+            const imageRes = await axios.post(imageHostingApi, imageData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const imageUrl = imageRes.data.data.url;
+
+            const data = {
+                postDate,
+                applicationDeadline,
+                postedUserEmail,
+                scholarshipName,
+                universityCity,
+                universityCountry,
+                universityName,
+                universityWorldRank,
+                subjectCategory,
+                scholarshipCategory,
+                degree,
+                applicationFees,
+                serviceCharge,
+                image: imageUrl,
+            };
+
+            console.table(data);
+
+            // Optionally, you can send the data to your backend here using axiosPublic
+            // await axiosPublic.post('/scholarships', data);
+
+        } catch (error) {
+            console.error('Error uploading the image or submitting the form:', error);
+        }
+    };
 
     return (
         <div className="my-10 mx-5">
             <div className="w-4/5 p-5 mx-auto bg-slate-100">
-                <form onSubmit={handleAddScholarship} >
+                <form onSubmit={handleAddScholarship}>
                     <div className="grid md:grid-cols-2 gap-2">
                         <div>
                             <p>Scholarship Name</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="scholarshipName" placeholder="Scholarship Name" id="scholarshipName" />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="scholarshipName" placeholder="Scholarship Name" id="scholarshipName" required />
                         </div>
                         <div>
                             <p>University Name</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityName" placeholder="University Name" id="universityName" />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityName" placeholder="University Name" id="universityName" required />
                         </div>
                         <div>
-                            <p> University Country</p>
-                            <select name='universityCountry' className="border-2 rounded-md w-full px-4 py-2 mb-2">
+                            <p>University Country</p>
+                            <select name='universityCountry' className="border-2 rounded-md w-full px-4 py-2 mb-2" required>
                                 <option disabled selected>Select One</option>
                                 <option value="United States">United States</option>
                                 <option value="United Kingdom">United Kingdom</option>
@@ -49,16 +91,16 @@ const AddScholarShip = () => {
                             </select>
                         </div>
                         <div>
-                            <p> University city</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityCity" placeholder="University City" id="universityCity" />
+                            <p>University City</p>
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityCity" placeholder="University City" id="universityCity" required />
                         </div>
                         <div>
-                            <p> University World rank</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityWorldRank" placeholder="University World rank" id="universityWorldRank" />
+                            <p>University World Rank</p>
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityWorldRank" placeholder="University World Rank" id="universityWorldRank" required />
                         </div>
                         <div>
-                            <p> Subject category</p>
-                            <select name='subjectCategory' className="border-2 rounded-md w-full px-4 py-2 mb-2">
+                            <p>Subject Category</p>
+                            <select name='subjectCategory' className="border-2 rounded-md w-full px-4 py-2 mb-2" required>
                                 <option disabled selected>Select One</option>
                                 <option value="Agriculture">Agriculture</option>
                                 <option value="Engineering">Engineering</option>
@@ -66,8 +108,8 @@ const AddScholarShip = () => {
                             </select>
                         </div>
                         <div>
-                            <p> Scholarship category</p>
-                            <select name='scholarshipCategory' className="border-2 rounded-md w-full px-4 py-2 mb-2">
+                            <p>Scholarship Category</p>
+                            <select name='scholarshipCategory' className="border-2 rounded-md w-full px-4 py-2 mb-2" required>
                                 <option disabled selected>Select One</option>
                                 <option value="Full fund">Full fund</option>
                                 <option value="Partial">Partial</option>
@@ -75,28 +117,38 @@ const AddScholarShip = () => {
                             </select>
                         </div>
                         <div>
-                            <p> Degree</p>
-                            <select name='degree' className="border-2 rounded-md w-full px-4 py-2 mb-2">
+                            <p>Degree</p>
+                            <select name='degree' className="border-2 rounded-md w-full px-4 py-2 mb-2" required>
                                 <option disabled selected>Select One</option>
                                 <option value="Diploma">Diploma</option>
                                 <option value="Bachelor">Bachelor</option>
-                                <option value="masters">masters</option>
+                                <option value="Masters">Masters</option>
                             </select>
                         </div>
                         <div>
-                            <p> Application fees</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="applicationFees" placeholder="Application fees" id="applicationFees" />
+                            <p>Application Fees</p>
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="applicationFees" placeholder="Application Fees" id="applicationFees" required />
                         </div>
                         <div>
-                            <p> Service charge</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="serviceCharge" placeholder="Service charge" id="serviceCharge" />
+                            <p>Service Charge</p>
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="serviceCharge" placeholder="Service Charge" id="serviceCharge" required />
+                        </div>
+                        <div>
+                            <p>Post Date</p>
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="date" name="postDate" id="postDate" required />
+                        </div>
+                        <div>
+                            <p>Application Deadline</p>
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="date" name="applicationDeadline" id="applicationDeadline" required />
+                        </div>
+                        <div>
+                            <p>Image</p>
+                            <input type="file" name="image" id="image" className="border-2 rounded-md w-full px-4 py-2 mb-2" required />
                         </div>
                     </div>
-
-
-                   <div className="flex justify-center my-5 font-bold">
-                   <input type="submit" value="Add Scholarship" className="px-4 py-3 text-white rounded-md bg-yellow-600" />
-                   </div>
+                    <div className="flex justify-center my-5 font-bold">
+                        <input type="submit" value="Add Scholarship" className="px-4 py-3 text-white rounded-md bg-yellow-600" />
+                    </div>
                 </form>
             </div>
         </div>

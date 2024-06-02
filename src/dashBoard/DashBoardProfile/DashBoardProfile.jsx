@@ -22,6 +22,7 @@ import useAuth from "../../components/Hooks/useAuth";
                     <h2 className="md:text-2xl text-lg my-5 font-bold text-center">Name : {user?.displayName || 'Gest'}</h2>
 
                     <p className="text-center mb-5">Email: {user?.email || "User"}</p>
+                    <p className="text-center mb-5">Role: {user?.role || "User"}</p>
                     <p className="text-center mb-5">Creation Time: {user?.metadata?.creationTime}</p>
 
                     {/* <div className="flex justify-center">
