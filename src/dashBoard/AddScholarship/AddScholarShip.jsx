@@ -1,13 +1,15 @@
  import axios from 'axios';
-import useAuth from '../../components/Hooks/useAuth';
-import useAxiosPublic from '../../components/Hooks/useAxiosPublic';
+import useAuth from '../../components/Hooks/useAuth'; 
+import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const imageHostingKey = import.meta.env.VITE_image_hosting_key;
 const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const AddScholarShip = () => {
     const { user } = useAuth();
-    const axiosPublic = useAxiosPublic();
+    const  axiosSecure = useAxiosSecure()
 
     const handleAddScholarship = async (e) => {
         e.preventDefault();
@@ -54,12 +56,18 @@ const AddScholarShip = () => {
                 applicationFees,
                 serviceCharge,
                 image: imageUrl,
-            };
-
-            console.table(data);
+            }; 
 
             // Optionally, you can send the data to your backend here using axiosPublic
             // await axiosPublic.post('/scholarships', data);
+            const res = await axiosSecure.post('/scholarships', data) 
+            if(res.data.insertedId){ 
+                Swal.fire({
+                    title: "success !",
+                    text: `Scholarship added successfully !`,
+                    icon: "success"
+                  }); 
+            }
 
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);
@@ -68,6 +76,9 @@ const AddScholarShip = () => {
 
     return (
         <div className="my-10 mx-5">
+            <Helmet>
+                <title>SM || Add Scholarship</title>
+            </Helmet>
             <div className="w-4/5 p-5 mx-auto bg-slate-100">
                 <form onSubmit={handleAddScholarship}>
                     <div className="grid md:grid-cols-2 gap-2">
@@ -96,7 +107,7 @@ const AddScholarShip = () => {
                         </div>
                         <div>
                             <p>University World Rank</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityWorldRank" placeholder="University World Rank" id="universityWorldRank" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="universityWorldRank" placeholder="University World Rank" id="universityWorldRank" required />
                         </div>
                         <div>
                             <p>Subject Category</p>

@@ -3,6 +3,7 @@ import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 
 const ManageUsers = () => {
@@ -61,6 +62,9 @@ const ManageUsers = () => {
 
     return (
         <div className="my-10">
+            <Helmet>
+                <title>SM || Manage Users</title>
+            </Helmet>
             <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-5">Manage Users</h3>
             <div>
                 <div className="overflow-x-auto shadow-xl bg-slate-200 m-5 min-h-screen rounded-md">

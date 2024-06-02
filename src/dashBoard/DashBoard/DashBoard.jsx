@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { FaHome } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -21,6 +22,9 @@ const DashBoard = () => {
 
     return (
         <div className="flex gap-2">
+            <Helmet>
+                <title>SM || Dashboard</title>
+            </Helmet>
             <div className="w-60 min-h-screen text-white bg-yellow-600 p-2">
                 <ul className="menu">
                 {links}
