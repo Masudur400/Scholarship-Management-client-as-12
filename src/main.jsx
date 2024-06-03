@@ -28,6 +28,7 @@ import AddScholarShip from './dashBoard/AddScholarship/AddScholarShip';
 import ScholarshipDetails from './components/AllScolarShip/ScholarshipDetails';
 import ManageScholarship from './dashBoard/ManageSchoralship/ManageScholarship';
 import UpdateScholarship from './dashBoard/ManageSchoralship/UpdateScholarship';
+import ManageScholarshipDetails from './dashBoard/ManageSchoralship/ManageScholarshipDetails';
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
         path:'/scholarship/:id',
         element:<ScholarshipDetails></ScholarshipDetails> ,
         loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+      },
+      {
+        path:'manageScholarshipDetails/:id',
+        element:<ManageScholarshipDetails></ManageScholarshipDetails>,
+        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       }
     ]
   },
@@ -93,7 +99,8 @@ const router = createBrowserRouter([
         path:'update/:id',
         element:<UpdateScholarship></UpdateScholarship>,
         loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
-      }
+      },
+      
 
 // moderator routes 
 

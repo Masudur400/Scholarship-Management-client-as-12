@@ -78,7 +78,7 @@ const ManageScholarship = () => {
                                     <td>{scholarship.degree}</td>
                                     <td>{scholarship.applicationFees}$</td>
                                     <td>
-                                        <Link to={`/scholarship/${scholarship._id}`}><button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><TbListDetails></TbListDetails> </button></Link></td>
+                                        <Link to={`/manageScholarshipDetails/${scholarship._id}`}><button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><TbListDetails></TbListDetails> </button></Link></td>
 
                                     <td> <Link to={`/dashboard/update/${scholarship._id}`}><button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><FaEdit /> </button></Link> </td>
 

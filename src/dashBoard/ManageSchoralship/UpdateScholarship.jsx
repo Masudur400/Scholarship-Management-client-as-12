@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { FaArrowLeft } from "react-icons/fa";
 
 
 
@@ -106,8 +107,11 @@ const UpdateScholarship = () => {
         <Helmet>
             <title>SM || Update Scholarship</title>
         </Helmet>
-        <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-3">Add Scholarship</h3>
+        <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-3">Update Scholarship</h3>
         <div className="w-4/5 p-5 mx-auto shadow-2xl border rounded-md">
+            
+            <Link to={-1} className="text-xl"><button className="my-5 bg-yellow-500 hover:bg-yellow-700 w-10 h-10 flex justify-center items-center text-white rounded-full "><FaArrowLeft ></FaArrowLeft></button></Link>
+
             <form
              onSubmit={handleUpdateScholarship}
              >
@@ -188,7 +192,7 @@ const UpdateScholarship = () => {
                     </div>
                 </div>
                 <div className="flex justify-center my-5 font-bold">
-                    <input type="submit" value="Add Scholarship" className="px-4 py-3 text-white rounded-md bg-yellow-600" />
+                    <input type="submit" value="Update Scholarship" className="px-4 py-3 text-white rounded-md bg-yellow-600 hover:bg-yellow-700" />
                 </div>
             </form>
         </div>
