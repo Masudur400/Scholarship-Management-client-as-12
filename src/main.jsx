@@ -25,6 +25,7 @@ import DashBoard from './dashBoard/DashBoard/DashBoard';
 import ManageUsers from './dashBoard/ManageUsers/ManageUsers';
 import DashBoardProfile from './dashBoard/DashBoardProfile/DashBoardProfile';
 import AddScholarShip from './dashBoard/AddScholarship/AddScholarShip';
+import ScholarshipDetails from './components/AllScolarShip/ScholarshipDetails';
 
 
 const router = createBrowserRouter([
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
       {
         path:'/updateProfile',
         element:<UpdateProfile></UpdateProfile>
+      },
+      {
+        path:'/scholarship/:id',
+        element:<ScholarshipDetails></ScholarshipDetails> ,
+        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       }
     ]
   },
