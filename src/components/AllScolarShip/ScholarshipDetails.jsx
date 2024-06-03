@@ -9,7 +9,7 @@ const ScholarshipDetails = () => {
     const scholarShips = useLoaderData() 
     
 
-    const {_id,postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory,  scholarshipCategory, degree, applicationFees, serviceCharge, image} = scholarShips 
+    const {postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory,  scholarshipCategory, degree, applicationFees, serviceCharge, image} = scholarShips 
     // console.log(details)
     return (
         <div className="shadow-lg p-4 md:flex gap-6  ">
@@ -33,6 +33,7 @@ const ScholarshipDetails = () => {
             <p><span className="font-bold">Application Fees :</span> {applicationFees}$ </p>
             <p><span className="font-bold">Service Charge :</span> {serviceCharge}$ </p>
            </div>
+           <p className="border-b-2 border-yellow-500 my-2"></p>
            <div className=" flex justify-between">
        <Link> <button className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Apply Now</button></Link>
        <Link to={-1}> <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md my-3 text-white font-bold">Back</button></Link>

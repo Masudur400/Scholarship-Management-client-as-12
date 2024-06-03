@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Scholarship = ({scholarship}) => {
 
-    const {_id,postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory,  scholarshipCategory, degree, applicationFees, serviceCharge, image} = scholarship
+    const {_id,postDate, applicationDeadline, scholarshipName, universityCountry, universityName,  subjectCategory, degree, image} = scholarship
 
     return (
         <div className="shadow-lg p-4 flex flex-col">
@@ -23,6 +23,7 @@ const Scholarship = ({scholarship}) => {
                 </div>
                 <p>Degree : {degree}</p>
              </div>
+             <p className="border-b-2 border-yellow-500 my-2"></p>
              <div className=" flex justify-center">
             <Link to={`/scholarship/${_id}`}> <button className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Details</button></Link>
              </div>
