@@ -14,7 +14,7 @@ const ScholarshipDetails = () => {
     return (
         <div className="shadow-lg p-4 md:flex gap-6  ">
         <div className="flex justify-center mb-3">
-           <img className="w-[600px]" src={image} alt="" />
+           <img className="md:w-[600px] md:h-[425px]" src={image} alt="" />
         </div>
         <div className="space-y-2 flex-1">
            <p><span className="font-bold">Scholarship Name :</span> {scholarshipName}</p>
