@@ -4,11 +4,14 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const ManageUsers = () => {
 
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
@@ -17,6 +20,7 @@ const ManageUsers = () => {
             return res.data
         }
     })
+     
 
     const handleDelete = user => {
 
@@ -47,11 +51,31 @@ const ManageUsers = () => {
 
     }
 
-    const handleUpdateRole = e =>{
-        e.preventDefault()
-        const role = e.target.role 
-        console.log(role)
+    const [currentUser, setCurrentUser] = useState() 
 
+
+    const handleUpdate =user =>{
+        setCurrentUser(user)
+    }
+
+
+    const handleUpdateRole = async e=> {
+        e.preventDefault()
+        const currentRole = e.target.role.value 
+        console.log(currentRole) 
+         
+        const data ={image:currentUser.image,email:currentUser.email,name:currentUser.name,role:currentRole}
+
+       const res = await axiosSecure.patch(`/users/${currentUser?._id}`, data)
+       if (res.data.modifiedCount > 0) {
+        refetch()
+        Swal.fire({
+            title: "success !",
+            text: `role update successfully !`,
+            icon: "success"
+        });
+        navigate('/dashboard/users')
+    }
     }
 
 
@@ -101,35 +125,44 @@ const ManageUsers = () => {
                                     </td>
                                     <td>
                                         {/* <button onClick={()=>handleUpdateRole(user)} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button> */}
-                                        <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /></button>
+
+                                        <div
+                                         onClick={()=>handleUpdate(user)}
+                                        >
+                                            <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-ghost text-lg border-red-200 bg-orange-200"><FaEdit /></button>
+                                        </div>
+
                                     </td>
                                     <td>
                                         <button onClick={() => handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
                                     </td>
+
                                 </tr>)
                             }
-                            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                                <div className="modal-box">
-                                <select name='role' className="border-2 rounded-md w-full px-4 py-2 mb-2">
-                                <option disabled selected>Select One</option>
-                                <option value="admin">admin</option>
-                                <option value="moderator">moderator</option>
-                                <option value="user">user</option>
-                            </select>
-                                    <div className="modal-action">
-                                        <form method="dialog">
-                                            {/* if there is a button in form, it will close the modal */}
-                                            <button className="btn">Close</button>
-                                            <button onClick={handleUpdateRole}  className="btn">Confirm</button>
-                                             
-                                        </form>
-                                    </div>
-                                </div>
-                            </dialog>
 
+                           
                         </tbody>
                     </table>
                 </div>
+                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                                <form  onSubmit={handleUpdateRole} className="modal-box">
+                                    <div >
+                                        <select name='role' className="border-2 rounded-md w-full px-4 py-2 mb-2">
+                                            <option disabled selected>Select One</option>
+                                            <option value="admin">admin</option>
+                                            <option value="moderator">moderator</option>
+                                            <option value="user">user</option>
+                                        </select>
+                                        <div className="modal-action">
+                                            <form method="dialog">
+                                                {/* if there is a button in div, it will close the modal */}
+                                                <button className="btn">Close</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value='confirm' className="btn -mt-12 absolute"/> 
+                                </form>
+                            </dialog>
             </div>
         </div>
     );
