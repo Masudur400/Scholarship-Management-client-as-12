@@ -3,13 +3,14 @@ import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { TbListDetails } from "react-icons/tb";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 
 const ManageScholarship = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const { data: scholarships = [] } = useQuery({
+    const { data: scholarships = [], refetch } = useQuery({
         queryKey: ['scholarships'],
         queryFn: async () => {
             const res = await axiosSecure.get('/scholarships')
@@ -46,7 +47,7 @@ const ManageScholarship = () => {
                                     <td>{scholarship.degree}</td>
                                     <td>{scholarship.applicationFees}$</td>
                                     <td>
-                                        <button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><TbListDetails></TbListDetails> </button></td>
+                                        <Link to={`/scholarship/${scholarship._id}`}><button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><TbListDetails></TbListDetails> </button></Link></td>
 
                                     <td> <button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><FaEdit /> </button> </td>
                                     <td> <button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdOutlineDeleteForever /> </button> </td>
