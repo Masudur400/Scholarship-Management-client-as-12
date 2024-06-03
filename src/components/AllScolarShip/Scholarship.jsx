@@ -8,7 +8,7 @@ const Scholarship = ({scholarship}) => {
     const {_id,postDate, applicationDeadline, scholarshipName, universityCountry, universityName,  subjectCategory, degree, image} = scholarship
 
     return (
-        <div className="shadow-lg p-4 flex flex-col group">
+        <div className="shadow-lg p-4 flex flex-col group border rounded-md">
              <div className="flex justify-center mb-3">
                 <img className="w-80 h-56 group-hover:scale-105" src={image} alt="" />
              </div>

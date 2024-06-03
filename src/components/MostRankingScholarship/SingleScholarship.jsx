@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
  
 const SingleScholarship = ({scholarship}) => {
 
-    const {_id,postDate, applicationDeadline, scholarshipName, universityCountry, universityName,  subjectCategory, degree, image} = scholarship
+    const {_id,postDate, applicationDeadline, scholarshipName, universityCountry, universityName,  subjectCategory, degree, image,universityWorldRank} = scholarship
 
     return (
-        <div className="shadow-lg p-4 flex flex-col group">
+        <div className="shadow-lg p-4 flex flex-col group border rounded-md">
              <div className="flex justify-center mb-3">
                 <img className="w-80 h-56 group-hover:scale-105" src={image} alt="" />
              </div>
@@ -19,6 +19,7 @@ const SingleScholarship = ({scholarship}) => {
                 <div>
                     <p>PostDate :  {postDate}</p>
                     <p>Deadline : {applicationDeadline}</p>
+                    <p>University Rank : <span className="text-red-500">{universityWorldRank} number in the world</span> </p>
                 </div>
                 <p>Degree : {degree}</p>
              </div>
