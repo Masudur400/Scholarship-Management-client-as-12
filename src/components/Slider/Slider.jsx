@@ -28,7 +28,7 @@ const Slider = ({image,text}) => {
 };
 
 Slider.propTypes = {
-    image: PropTypes.backgroundImage,
+    image: PropTypes.string,
     text: PropTypes.string,
 
 }

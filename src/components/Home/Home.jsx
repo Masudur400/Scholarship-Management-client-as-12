@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import Carosel from "../Slider/Carosel";
+import MostRankingScholarship from "../MostRankingScholarship/MostRankingScholarship";
 
  
 const Home = () => {
@@ -8,9 +9,13 @@ const Home = () => {
             <Helmet>
                 <title>SM || Home</title>
             </Helmet>
+            
          <div>
          <Carosel></Carosel>
          </div>
+         <div>
+                <MostRankingScholarship></MostRankingScholarship>
+            </div>
         </div>
     );
 };
