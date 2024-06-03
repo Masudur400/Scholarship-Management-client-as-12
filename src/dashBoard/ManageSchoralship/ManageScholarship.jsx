@@ -22,7 +22,7 @@ const ManageScholarship = () => {
     const handleDelete = scholarship =>{
         Swal.fire({
             title: "Are you sure?",
-            text: "You want to delete user...!",
+            text: "You want to delete scholarship...!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -49,6 +49,7 @@ const ManageScholarship = () => {
 
     return (
         <div> 
+            <h3 className="text-lg md:text-2xl font-bold text-yellow-500 text-center my-5">Manage Scholarship</h3>
             <div>
                 <div className="overflow-x-auto shadow-2xl  m-5 min-h-screen rounded-md">
                     <table className="table">
@@ -79,7 +80,7 @@ const ManageScholarship = () => {
                                     <td>
                                         <Link to={`/scholarship/${scholarship._id}`}><button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><TbListDetails></TbListDetails> </button></Link></td>
 
-                                    <td> <button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><FaEdit /> </button> </td>
+                                    <td> <Link to={`/dashboard/update/${scholarship._id}`}><button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><FaEdit /> </button></Link> </td>
 
                                     <td> <button onClick={()=>handleDelete(scholarship)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdOutlineDeleteForever /> </button> </td>
                                 </tr>)
