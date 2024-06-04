@@ -45,15 +45,14 @@ const AllScolarShip = () => {
     return (
         <div className="my-10">
             <Helmet>
-                <title>SM || Home</title>
+                <title>SM || All Scholarship</title>
             </Helmet>
             <h3 className="text-lg md:text-2xl font-bold text-yellow-500 text-center my-5">All Scholarship</h3>
             <form onSubmit={handleSearch} className="my-5">
                 <div className="flex md:w-2/4 mx-auto">
                 <input type="search" name="search" id="" placeholder="Search" className="border-2 border-yellow-500 rounded-l-md w-full px-4 py-2 mb-2" />
                 <input type="submit" value="Search" className="rounded-r-md  bg-yellow-500 text-white font-bold px-4 py-2 mb-2"/>
-                </div>
-
+                </div> 
             </form>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

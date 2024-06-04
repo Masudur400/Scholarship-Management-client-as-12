@@ -17,8 +17,7 @@ import { useQuery } from "@tanstack/react-query";
         }
     })
 
-    const logdinUser = users.find(logduser => logduser.email === user?.email)
-    console.log(logdinUser)
+    const logdinUser = users.find(logduser => logduser.email === user?.email) 
 
 
     return (

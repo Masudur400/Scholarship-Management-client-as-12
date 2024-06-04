@@ -1,6 +1,7 @@
 
 import { Link, useLoaderData  } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
  
 const ScholarshipDetails = () => {
@@ -13,6 +14,9 @@ const ScholarshipDetails = () => {
     // console.log(details)
     return (
         <div className="shadow-lg p-4 md:flex gap-6  ">
+            <Helmet>
+                <title>SM || Scholarship Details</title>
+            </Helmet>
         <div className="flex justify-center mb-3">
            <img className="md:w-[600px] md:h-[425px]" src={image} alt="" />
         </div>
