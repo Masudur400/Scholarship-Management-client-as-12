@@ -24,7 +24,7 @@ const UpdateScholarship = () => {
     const { _id,
         postDate,
         applicationDeadline,
-        postedUserEmail,
+        // postedUserEmail,
         scholarshipName,
         universityCity,
         universityCountry,

@@ -2,23 +2,41 @@ import { Helmet } from "react-helmet";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Scholarship from "./Scholarship";
+import { useEffect, useState } from "react";
 
 
 const AllScolarShip = () => {
 
+    const [query , setQuery] = useState('')
+    const [filteredData, setFilteredData] = useState([]) 
+
     const axiosSecure = useAxiosSecure()
 
-    const { data: scholarships = [] } = useQuery({
+    const { data: scholarships = []} = useQuery({
         queryKey: ['scholarships'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/scholarships')
+            const res = await axiosSecure.get('/scholarships') 
             return res.data
         }
     })
+    // const {_id,postDate, applicationDeadline, scholarshipName, universityCountry, universityName,  subjectCategory, degree, image} = scholarship
+
+    useEffect(()=>{
+        if(query === ''){
+            setFilteredData(scholarships) 
+        } 
+        else{
+            const filterData = scholarships.filter(item => item.degree.toLowerCase().includes(query) ||  item.scholarshipName.toLowerCase().includes(query) || item.universityName.toLowerCase().includes(query) || item.subjectCategory.toLowerCase().includes(query) || item.universityCountry.toLowerCase().includes(query) ) 
+            setFilteredData(filterData)
+        }   
+         
+    },[query, scholarships])
+    
 
     const handleSearch = e =>{
         e.preventDefault()
-        const searchText = e.target.search.value
+        const searchText = e.target.search.value.toLowerCase()
+        setQuery(searchText) 
         console.log(searchText)
     }
 
@@ -40,7 +58,7 @@ const AllScolarShip = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
-                    scholarships?.map(scholarship => <Scholarship key={scholarship._id} scholarship={scholarship}></Scholarship>)
+                    filteredData.map(scholarship => <Scholarship key={scholarship._id} scholarship={scholarship}></Scholarship>)
                 }
             </div>
 
