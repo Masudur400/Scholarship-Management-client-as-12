@@ -18,7 +18,9 @@ const ScholarshipDetails = () => {
 
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const scholarShips = useLoaderData()  
+    const scholarShips = useLoaderData()
+    const [ratingPointError, setRatingPointError] = useState('')
+    const navigate = useNavigate()
 
 
     const { _id, postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = scholarShips
@@ -34,10 +36,10 @@ const ScholarshipDetails = () => {
         // const imageFile = form.get('image');
 
         // if (ratingPoint > 5) {
-        //     setRatingPoint('rating will be number of 1-5')
+        //     setRatingPointError('rating will be number of 1-5')
         //     return
         // }
-        // setRatingPoint('')
+        // setRatingPointError('')
 
         // try {
         //     const imageData = new FormData();
@@ -138,7 +140,7 @@ const ScholarshipDetails = () => {
                             <p>Rating point</p>
                             <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="ratingPoint" placeholder="Rating point" id="" required />
                         </div>
-                        {ratingPoint && <p className="text-red-500">{ratingPoint}</p>}
+                        {ratingPointError && <p className="text-red-500">{ratingPointError}</p>}
                         <div>
                             <p>Reviewer image</p>
                             <input type="file" name="image" id="image" className="border-2 rounded-md w-full px-4 py-2 mb-2" required />
