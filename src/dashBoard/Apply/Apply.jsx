@@ -5,6 +5,8 @@ import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { useState } from "react";
 import Payment from "../Payment/Payment";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -85,6 +87,8 @@ const Apply = () => {
 
 
             await axiosSecure.post('/applies', data)
+            toast.success('applied success')
+
             // if (res.data.insertedId) {
             //     Swal.fire({
             //         title: "success !",
@@ -100,6 +104,7 @@ const Apply = () => {
 
     return (
         <div className="my-10 mx-5">
+            <ToastContainer autoClose={1000}></ToastContainer>
             <Helmet>
                 <title>SM || Apply Scholarship</title>
             </Helmet>
@@ -162,33 +167,24 @@ const Apply = () => {
                         </div>
                     </div>
                     <div className="flex justify-center my-5 font-bold">
-                        <button onClick={() => document.getElementById('my_modal_5').showModal()} type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button>
+                        <button
+                        onClick={()=>document.getElementById('my_modal_3').showModal()} 
+                          type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button>
 
                     </div>
                 </form>
             </div>
-            {/* Modal show  */}
-            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                <form onSubmit={''} className="modal-box">
-                    <div >
-                        {/* <select name='role' className="border-2 rounded-md w-full px-4 py-2 mb-2">
-                                <option disabled selected>Select One</option>
-                                <option value="admin">admin</option>
-                                <option value="moderator">moderator</option>
-                                <option value="user">user</option>
-                            </select> */}
-                        <Payment></Payment>
-                        <div className="modal-action">
-                            <form method="dialog">
-                                {/* if there is a button in div, it will close the modal */}
-                                <button className="btn">Close</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <input type="submit" value='confirm' className="btn -mt-12 absolute" />
-                </form>
-            </dialog>
+             {/* Modal show  */}
+            <dialog id="my_modal_3" className="modal">
+                <div className="modal-box">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                     <Payment></Payment>
+                </div>
+            </dialog> 
+            
         </div>
     );
 };

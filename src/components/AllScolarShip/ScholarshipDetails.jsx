@@ -6,6 +6,8 @@ import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -14,7 +16,7 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const ScholarshipDetails = () => {
 
-    const {user} = useAuth()
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const scholarShips = useLoaderData()
     const [ratingPoint, setRatingPoint] = useState('')
@@ -72,6 +74,7 @@ const ScholarshipDetails = () => {
         //     }; 
 
         //     const res = await axiosSecure.post('/reviews', data)
+        // toast.success('review successful')
         //     if (res.data.insertedId) {
         //         Swal.fire({
         //             title: "success !",
@@ -83,12 +86,13 @@ const ScholarshipDetails = () => {
         // } catch (error) {
         //     console.error('Error uploading the image or submitting the form:', error);
         // }
- 
-        document.getElementById("my_modal_5").close(); 
+
+        document.getElementById("my_modal_5").close();
     }
 
     return (
         <div>
+            <ToastContainer autoClose={1000}></ToastContainer>
             <div className="shadow-lg p-4 md:flex gap-6  ">
                 <Helmet>
                     <title>SM || Scholarship Details</title>
@@ -116,7 +120,7 @@ const ScholarshipDetails = () => {
                     <p className="border-b-2 border-yellow-500 my-2"></p>
                     <div className=" flex justify-between">
 
-                        <Link> <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Apply Now</button></Link> 
+                        <Link> <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Apply Now</button></Link>
 
                         <Link to={-1}> <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md my-3 text-white font-bold">Back</button></Link>
                     </div>
@@ -152,9 +156,9 @@ const ScholarshipDetails = () => {
                             </form>
                         </div>
                     </div>
-                   <Link to={`/dashboard/apply/${_id}`}>  <input type="submit" value='Next' className="btn -mt-12 bg-yellow-500 hover:bg-yellow-600 text-white font-bold absolute" /></Link>
-                     
-                   
+                    <Link to={`/dashboard/apply/${_id}`}>  <input type="submit" value='Next' className="btn -mt-12 bg-yellow-500 hover:bg-yellow-600 text-white font-bold absolute" /></Link>
+
+
                 </form>
             </dialog>
         </div>
