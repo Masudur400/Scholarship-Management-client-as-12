@@ -27,62 +27,62 @@ const ScholarshipDetails = () => {
 
     const handleReview = async (e) => {
         e.preventDefault()
-        const form = new FormData(e.currentTarget);
-        const reviewerName = form.get('reviewerName')
-        const ratingPoint = form.get('ratingPoint')
-        const reviewerComments = form.get('reviewerComments')
-        const imageFile = form.get('image');
+        // const form = new FormData(e.currentTarget);
+        // const reviewerName = form.get('reviewerName')
+        // const ratingPoint = form.get('ratingPoint')
+        // const reviewerComments = form.get('reviewerComments')
+        // const imageFile = form.get('image');
 
-        if (ratingPoint > 5) {
-            setRatingPoint('rating will be number of 1-5')
-            return
-        }
-        setRatingPoint('')
+        // if (ratingPoint > 5) {
+        //     setRatingPoint('rating will be number of 1-5')
+        //     return
+        // }
+        // setRatingPoint('')
 
-        try {
-            const imageData = new FormData();
-            imageData.append('image', imageFile);
+        // try {
+        //     const imageData = new FormData();
+        //     imageData.append('image', imageFile);
 
-            const imageRes = await axios.post(imageHostingApi, imageData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+        //     const imageRes = await axios.post(imageHostingApi, imageData, {
+        //         headers: {
+        //             'Content-Type': 'multipart/form-data',
+        //         },
+        //     });
 
-            const imageUrl = imageRes.data.data.url;
-            const date = new Date()
-            const year = date.getFullYear()
-            const month = date.getMonth()
-            const day = date.getDay()
+        //     const imageUrl = imageRes.data.data.url;
+        //     const date = new Date()
+        //     const year = date.getFullYear()
+        //     const month = date.getMonth()
+        //     const day = date.getDay()
 
-            const data = {
-                reviewerName,
-                reviewerEmail:user?.email,
-                universityName,
-                ratingPoint,
-                scholarshipName,
-                universityImage: image,
-                reviewerComments,
-                reviewerImage: imageUrl,
-                reviewDate: {
-                    year: year,
-                    month: month,
-                    day: day
-                }
-            }; 
+        //     const data = {
+        //         reviewerName,
+        //         reviewerEmail:user?.email,
+        //         universityName,
+        //         ratingPoint,
+        //         scholarshipName,
+        //         universityImage: image,
+        //         reviewerComments,
+        //         reviewerImage: imageUrl,
+        //         reviewDate: {
+        //             year: year,
+        //             month: month,
+        //             day: day
+        //         }
+        //     }; 
 
-            const res = await axiosSecure.post('/reviews', data)
-            if (res.data.insertedId) {
-                Swal.fire({
-                    title: "success !",
-                    text: `review added successfully !`,
-                    icon: "success"
-                }); 
-            }
+        //     const res = await axiosSecure.post('/reviews', data)
+        //     if (res.data.insertedId) {
+        //         Swal.fire({
+        //             title: "success !",
+        //             text: `review added successfully !`,
+        //             icon: "success"
+        //         }); 
+        //     }
 
-        } catch (error) {
-            console.error('Error uploading the image or submitting the form:', error);
-        }
+        // } catch (error) {
+        //     console.error('Error uploading the image or submitting the form:', error);
+        // }
  
         document.getElementById("my_modal_5").close(); 
     }
