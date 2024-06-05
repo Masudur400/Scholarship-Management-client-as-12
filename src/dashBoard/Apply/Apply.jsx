@@ -70,32 +70,24 @@ const Apply = () => {
                 applicantAddress,
                 applicantScholarshipCategory,
                 gender,
+                universityImage:image,
                 applicantSubjectCategory,
                 applicantDegree,
                 SSCresult,
                 HSCresult,
                 UserEmail,
                 userName,
+                applicantImage: imageUrl,
                 applicantDate: {
                     year: year,
                     month: month,
                     day: day
                 },
-                applicantImage: imageUrl,
-            };
-            console.table(data)
+            }; 
 
 
             await axiosSecure.post('/applies', data)
-            toast.success('applied success')
-
-            // if (res.data.insertedId) {
-            //     Swal.fire({
-            //         title: "success !",
-            //         text: `applied successfully !`,
-            //         icon: "success"
-            //     });
-            // }
+            toast.success('applied success') 
 
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);

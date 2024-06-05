@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
 import Carosel from "../Slider/Carosel";
-import MostRankingScholarship from "../MostRankingScholarship/MostRankingScholarship";
-import Loading from "../Loading/Loading";
+import MostRankingScholarship from "../MostRankingScholarship/MostRankingScholarship"; 
 
 
 const Home = () => {

@@ -18,9 +18,7 @@ const ScholarshipDetails = () => {
 
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const scholarShips = useLoaderData()
-    const [ratingPoint, setRatingPoint] = useState('')
-    const navigate = useNavigate()
+    const scholarShips = useLoaderData()  
 
 
     const { _id, postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = scholarShips
