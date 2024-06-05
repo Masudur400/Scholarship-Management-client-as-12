@@ -3,6 +3,8 @@ import { Link, useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 
 
@@ -13,6 +15,7 @@ const ScholarshipDetails = () => {
 
     const axiosSecure = useAxiosSecure()
     const scholarShips = useLoaderData()
+    const [ratingPoint, setRatingPoint] = useState('')
 
 
     const { postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = scholarShips
@@ -27,6 +30,12 @@ const ScholarshipDetails = () => {
         const reviewerComments = form.get('reviewerComments')
         const imageFile = form.get('image');
 
+        if(ratingPoint > 5){
+            setRatingPoint('rating will be number of 1-5')
+            return
+        }
+        setRatingPoint('')
+
         try {
             const imageData = new FormData();
             imageData.append('image', imageFile);
@@ -38,24 +47,35 @@ const ScholarshipDetails = () => {
             });
 
             const imageUrl = imageRes.data.data.url;
+            const date = new Date()
+            const year = date.getFullYear()
+            const month = date.getMonth()
+            const day = date.getDay()
 
             const data = {
                 reviewerName,
+                universityName,
                 ratingPoint,
+                scholarshipName,
+                universityImage:image,
                 reviewerComments,
                 reviewerImage: imageUrl,
+                reviewDate:{
+                    year:year,
+                    month:month,
+                    day:day
+                }
             }; 
 console.log(imageUrl)
-            // Optionally, you can send the data to your backend here using axiosPublic
-            // await axiosPublic.post('/scholarships', data);
-            // const res = await axiosSecure.post('/scholarships', data) 
-            // if(res.data.insertedId){ 
-            //     Swal.fire({
-            //         title: "success !",
-            //         text: `Scholarship added successfully !`,
-            //         icon: "success"
-            //       }); 
-            // }
+             
+            const res = await axiosSecure.post('/reviews', data) 
+            if(res.data.insertedId){ 
+                Swal.fire({
+                    title: "success !",
+                    text: `review added successfully !`,
+                    icon: "success"
+                  }); 
+            }
 
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);
@@ -115,6 +135,7 @@ console.log(imageUrl)
                             <p>Rating point</p>
                             <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="ratingPoint" placeholder="Rating point" id="" required/>
                         </div> 
+                        {ratingPoint && <p className="text-red-500">{ratingPoint}</p>}
                         <div>
                             <p>Reviewer image</p>
                             <input type="file" name="image" id="image" className="border-2 rounded-md w-full px-4 py-2 mb-2" required />
