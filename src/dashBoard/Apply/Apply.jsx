@@ -106,7 +106,7 @@ const Apply = () => {
                     <div className="grid md:grid-cols-2 gap-2">
                         <div>
                             <p>Applicant phone number</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="applicantPhoneNumber" placeholder="Applicant phone number" id="applicantPhoneNumber" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="applicantPhoneNumber" placeholder="Applicant phone number" id="applicantPhoneNumber" required />
                             {phoneNumberError && <p className="text-red-500">{phoneNumberError}</p>}
                         </div>
                         <div>
@@ -146,11 +146,11 @@ const Apply = () => {
                         </div>
                         <div>
                             <p>SSC Result</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="SSCresult" placeholder="SSC Result" id="SSCresult" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="SSCresult" placeholder="SSC Result" id="SSCresult" required />
                         </div>
                         <div>
                             <p>HSC result</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="HSCresult" placeholder="HSC Result" id="HSCresult" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="HSCresult" placeholder="HSC Result" id="HSCresult" required />
                         </div>
 
                         <div>
@@ -159,24 +159,12 @@ const Apply = () => {
                         </div>
                     </div>
                     <div className="flex justify-center my-5 font-bold">
-                        <Link to={`/dashboard/payment/${_id}`}><button
-                        // onClick={()=>document.getElementById('my_modal_3').showModal()} 
-
-                          type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button></Link>
+                        <Link to={`/dashboard/payment/${_id}`}><button type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button></Link>
 
                     </div>
                 </form>
             </div>
-             {/* Modal show  */}
-            {/* <dialog id="my_modal_3" className="modal">
-                <div className="modal-box">
-                    <form method="dialog">
-                        
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                    </form>
-                     <Payment applicationFees={applicationFees} serviceCharge={serviceCharge}></Payment>
-                </div>
-            </dialog>  */}
+              
             
         </div>
     );

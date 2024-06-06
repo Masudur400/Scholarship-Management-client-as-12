@@ -141,7 +141,7 @@ const ScholarshipDetails = () => {
                         </div>
                         <div>
                             <p>Rating point</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="ratingPoint" placeholder="Rating point" id="" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="ratingPoint" placeholder="Rating point" id="" required />
                         </div>
                         {/* {ratingPointError && <p className="text-red-500">{ratingPointError}</p>} */}
                         <div>

@@ -108,7 +108,7 @@ const AddScholarShip = () => {
                         </div>
                         <div>
                             <p>University World Rank</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="universityWorldRank" placeholder="University World Rank" id="universityWorldRank" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="universityWorldRank" placeholder="University World Rank" id="universityWorldRank" required />
                         </div>
                         <div>
                             <p>Subject Category</p>
@@ -139,11 +139,11 @@ const AddScholarShip = () => {
                         </div>
                         <div>
                             <p>Application Fees</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="applicationFees" placeholder="Application Fees" id="applicationFees" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="applicationFees" placeholder="Application Fees" id="applicationFees" required />
                         </div>
                         <div>
                             <p>Service Charge</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="serviceCharge" placeholder="Service Charge" id="serviceCharge" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="serviceCharge" placeholder="Service Charge" id="serviceCharge" required />
                         </div>
                         <div>
                             <p>Post Date</p>
