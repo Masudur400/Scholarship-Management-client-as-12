@@ -31,6 +31,7 @@ import UpdateScholarship from './dashBoard/ManageSchoralship/UpdateScholarship';
 import ManageScholarshipDetails from './dashBoard/ManageSchoralship/ManageScholarshipDetails';
 import Apply from './dashBoard/Apply/Apply'; 
 import Payment from './dashBoard/Payment/Payment';
+import MyApplycation from './dashBoard/MyApplycation/MyApplycation';
 
 
 const router = createBrowserRouter([
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
         element:<ManageScholarshipDetails></ManageScholarshipDetails>,
         loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
+      {
+        path:'myApplication',
+        element:<MyApplycation></MyApplycation>
+      }
       
 
 // moderator routes 

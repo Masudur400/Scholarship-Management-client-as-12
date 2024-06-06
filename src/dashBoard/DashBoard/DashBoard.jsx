@@ -8,6 +8,8 @@ const DashBoard = () => {
         {/* Admin rout  */}
         <li><NavLink to="/dashboard/dashboardProfile" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Profile</NavLink></li>
         
+        <li><NavLink to="/dashboard/myApplication" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >My Application</NavLink></li>
+
         <li><NavLink to="/dashboard/users" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Manage Users</NavLink></li>
 
         <li><NavLink to="/dashboard/addScholarship" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Add Scholarship</NavLink></li>

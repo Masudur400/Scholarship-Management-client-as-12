@@ -1,10 +1,9 @@
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import { Link, useLoaderData } from "react-router-dom";
+import {   useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
-import { useState } from "react";
-import Payment from "../Payment/Payment";
+import { useState } from "react"; 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -16,6 +15,7 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 const Apply = () => {
 
     const applyShip = useLoaderData()
+    const navigate = useNavigate()
     const [phoneNumberError, setPhoneNumberError] = useState('')
     const {_id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
 
@@ -25,6 +25,7 @@ const Apply = () => {
     const handleAddScholarship = async (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
+        const applicantName = form.get('applicantName');
         const applicantPhoneNumber = form.get('applicantPhoneNumber');
         const applicantUniversityName = universityName;
         const applicantAddress = form.get('applicantAddress');
@@ -68,6 +69,7 @@ const Apply = () => {
                 applicantPhoneNumber,
                 applicantUniversityName,
                 applicantAddress,
+                applicantName,
                 applicantScholarshipCategory,
                 gender,
                 universityImage:image,
@@ -84,12 +86,15 @@ const Apply = () => {
                     month: month,
                     day: day
                 },
-                normalDate : new Date()
+                normalDate:date
             }; 
 
 
-            await axiosSecure.post('/applies', data)
-            toast.success('accept your data') 
+            const res = await axiosSecure.post('/applies', data)
+            if(res.data.insertedId){ 
+                toast.success('accept your data') 
+                navigate(`/dashboard/payment/${_id}`)
+            }
 
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);
@@ -106,6 +111,11 @@ const Apply = () => {
             <div className="w-4/5 p-5 mx-auto shadow-2xl border rounded-md">
                 <form onSubmit={handleAddScholarship}>
                     <div className="grid md:grid-cols-2 gap-2">
+                        <div>
+                            <p>Applicant Name</p>
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="applicantName" placeholder="Applicant Name" id="applicantName" required />
+                            
+                        </div>
                         <div>
                             <p>Applicant phone number</p>
                             <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="applicantPhoneNumber" placeholder="Applicant phone number" id="applicantPhoneNumber" required />
@@ -161,7 +171,7 @@ const Apply = () => {
                         </div>
                     </div>
                     <div className="flex justify-center my-5 font-bold">
-                        <Link to={`/dashboard/payment/${_id}`}><button type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button></Link>
+                         <button type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button> 
 
                     </div>
                 </form>
