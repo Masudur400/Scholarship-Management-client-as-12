@@ -77,12 +77,14 @@ const Apply = () => {
                 HSCresult,
                 UserEmail,
                 userName,
+                status: 'pending',
                 applicantImage: imageUrl,
                 applicantDate: {
                     year: year,
                     month: month,
                     day: day
                 },
+                normalDate : new Date()
             }; 
 
 

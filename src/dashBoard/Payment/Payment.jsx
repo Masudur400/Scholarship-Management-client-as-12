@@ -1,30 +1,36 @@
  
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { useLoaderData } from 'react-router-dom';
+import CheckoutForm from './CheckoutForm';
 
 
+
+const stripePromise = loadStripe(import.meta.env.VITE_pk)
 
 const Payment = () => {
 
     const payment = useLoaderData()
      
-    const {_id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = payment
-
-     
+    const {_id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = payment 
      
 
-    const totalFee = parseFloat(applicationFees) + parseFloat(serviceCharge)
-
-
-    const handlePayment = () =>{
-        console.log('clicked', applicationFees, serviceCharge);
-    }
-
+    const totalFee = parseFloat(applicationFees) + parseFloat(serviceCharge) 
+ 
 
     return (
         <div>
-            <h2 className="font-bold text-yellow-500 text-center">Payment</h2>
-             <p>total: {totalFee}</p>
-            <button onClick={handlePayment} className="btn">pay</button>
+             <div className=' flex justify-center items-center my-10'>
+             <div className='md:w-2/3 mx-auto shadow-lg p-4 rounded-sm border'>
+            <h2 className="font-bold text-yellow-500 text-center text-xl">PAYMENT</h2>
+            <p className='border border-yellow-600 mx-auto my-2'></p>
+             <p className='mb-5 font-bold'>Total Fees: ${totalFee}</p>
+                <Elements stripe={stripePromise}>
+                     <CheckoutForm totalFee={totalFee} _id={_id}></CheckoutForm>
+                </Elements>
+            </div>
+             </div>
+            
         </div>
     );
 };
