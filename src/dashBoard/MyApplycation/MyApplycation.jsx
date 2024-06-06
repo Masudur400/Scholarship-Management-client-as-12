@@ -1,9 +1,7 @@
  
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../components/Hooks/useAuth";
-import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
-import MyApplicationDesign from "./MyApplicationDesign";
-import { Helmet } from "react-helmet";
+import useAxiosSecure from "../../components/Hooks/useAxiosSecure"; 
 
  
 const MyApplycation = () => {
@@ -21,7 +19,7 @@ const MyApplycation = () => {
 
     return (
         <div>
-            
+ 
         </div>
     );
 };

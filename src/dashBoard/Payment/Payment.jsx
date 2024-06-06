@@ -12,7 +12,7 @@ const Payment = () => {
 
     const payment = useLoaderData()
      
-    const {_id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = payment 
+    const {_id, applicationFees, serviceCharge} = payment 
      
 
     const totalFee = parseFloat(applicationFees) + parseFloat(serviceCharge) 

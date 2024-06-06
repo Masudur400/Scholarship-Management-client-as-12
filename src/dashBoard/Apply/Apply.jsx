@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import {   useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
-import { useState } from "react"; 
+import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -17,7 +17,7 @@ const Apply = () => {
     const applyShip = useLoaderData()
     const navigate = useNavigate()
     const [phoneNumberError, setPhoneNumberError] = useState('')
-    const {_id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
+    const { _id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
 
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
@@ -67,12 +67,16 @@ const Apply = () => {
 
             const data = {
                 applicantPhoneNumber,
+                applicationFees: parseInt(applicationFees + serviceCharge),
                 applicantUniversityName,
                 applicantAddress,
                 applicantName,
+                scholarshipName,
                 applicantScholarshipCategory,
                 gender,
-                universityImage:image,
+                universityCity,
+                universityCountry,
+                universityImage: image,
                 applicantSubjectCategory,
                 applicantDegree,
                 SSCresult,
@@ -86,13 +90,13 @@ const Apply = () => {
                     month: month,
                     day: day
                 },
-                normalDate:date
-            }; 
+                normalDate: date
+            };
 
 
             const res = await axiosSecure.post('/applies', data)
-            if(res.data.insertedId){ 
-                toast.success('accept your data') 
+            if (res.data.insertedId) {
+                toast.success('accept your data')
                 navigate(`/dashboard/payment/${_id}`)
             }
 
@@ -114,7 +118,7 @@ const Apply = () => {
                         <div>
                             <p>Applicant Name</p>
                             <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="applicantName" placeholder="Applicant Name" id="applicantName" required />
-                            
+
                         </div>
                         <div>
                             <p>Applicant phone number</p>
@@ -171,13 +175,13 @@ const Apply = () => {
                         </div>
                     </div>
                     <div className="flex justify-center my-5 font-bold">
-                         <button type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button> 
+                        <button type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button>
 
                     </div>
                 </form>
             </div>
-              
-            
+
+
         </div>
     );
 };
