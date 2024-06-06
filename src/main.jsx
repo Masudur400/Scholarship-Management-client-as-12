@@ -30,6 +30,7 @@ import ManageScholarship from './dashBoard/ManageSchoralship/ManageScholarship';
 import UpdateScholarship from './dashBoard/ManageSchoralship/UpdateScholarship';
 import ManageScholarshipDetails from './dashBoard/ManageSchoralship/ManageScholarshipDetails';
 import Apply from './dashBoard/Apply/Apply'; 
+import Payment from './dashBoard/Payment/Payment';
 
 
 const router = createBrowserRouter([
@@ -67,11 +68,8 @@ const router = createBrowserRouter([
         element:<ScholarshipDetails></ScholarshipDetails> ,
         loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
-      {
-        path:'manageScholarshipDetails/:id',
-        element:<ManageScholarshipDetails></ManageScholarshipDetails>,
-        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
-      }
+      
+      
     ]
   },
   {
@@ -105,7 +103,17 @@ const router = createBrowserRouter([
         path:'apply/:id',
         element:<Apply></Apply>,
         loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
-      }
+      },
+      {
+        path:'payment/:id',
+        element:<Payment></Payment>,
+        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+      },
+      {
+        path:'manageScholarshipDetails/:id',
+        element:<ManageScholarshipDetails></ManageScholarshipDetails>,
+        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+      },
       
 
 // moderator routes 

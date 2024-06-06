@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { useState } from "react";
@@ -16,8 +16,8 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 const Apply = () => {
 
     const applyShip = useLoaderData()
-    const [phoneNumberError, setPhoneNumberError] = useState()
-    const { postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
+    const [phoneNumberError, setPhoneNumberError] = useState('')
+    const {_id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
 
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
@@ -159,23 +159,24 @@ const Apply = () => {
                         </div>
                     </div>
                     <div className="flex justify-center my-5 font-bold">
-                        <button
-                        onClick={()=>document.getElementById('my_modal_3').showModal()} 
-                          type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button>
+                        <Link to={`/dashboard/payment/${_id}`}><button
+                        // onClick={()=>document.getElementById('my_modal_3').showModal()} 
+
+                          type="submit" className="px-4 py-3 text-white rounded-md bg-yellow-600">Next</button></Link>
 
                     </div>
                 </form>
             </div>
              {/* Modal show  */}
-            <dialog id="my_modal_3" className="modal">
+            {/* <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
                     <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
+                        
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
-                     <Payment></Payment>
+                     <Payment applicationFees={applicationFees} serviceCharge={serviceCharge}></Payment>
                 </div>
-            </dialog> 
+            </dialog>  */}
             
         </div>
     );
