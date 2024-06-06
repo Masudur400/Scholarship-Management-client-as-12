@@ -87,7 +87,7 @@ const Apply = () => {
 
 
             await axiosSecure.post('/applies', data)
-            toast.success('applied success') 
+            toast.success('accept your data') 
 
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);

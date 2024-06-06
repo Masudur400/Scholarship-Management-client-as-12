@@ -3,11 +3,9 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import { useState } from "react";
+import { useState } from "react"; 
+import useAuth from "../Hooks/useAuth"; 
 import Swal from "sweetalert2";
-import useAuth from "../Hooks/useAuth";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -19,8 +17,8 @@ const ScholarshipDetails = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const scholarShips = useLoaderData()
-    const [ratingPointError, setRatingPointError] = useState('')
     const navigate = useNavigate()
+    // const [ratingPointError, setRatingPointError] = useState('') 
 
 
     const { _id, postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = scholarShips
@@ -29,11 +27,12 @@ const ScholarshipDetails = () => {
 
     const handleReview = async (e) => {
         e.preventDefault()
-        // const form = new FormData(e.currentTarget);
-        // const reviewerName = form.get('reviewerName')
-        // const ratingPoint = form.get('ratingPoint')
-        // const reviewerComments = form.get('reviewerComments')
-        // const imageFile = form.get('image');
+        const form = new FormData(e.currentTarget);
+        const reviewerName = form.get('reviewerName')
+        const ratingPoint = form.get('ratingPoint')
+        const reviewerComments = form.get('reviewerComments')
+        const imageFile = form.get('image');
+         
 
         // if (ratingPoint > 5) {
         //     setRatingPointError('rating will be number of 1-5')
@@ -41,58 +40,62 @@ const ScholarshipDetails = () => {
         // }
         // setRatingPointError('')
 
-        // try {
-        //     const imageData = new FormData();
-        //     imageData.append('image', imageFile);
+        try {
+            const imageData = new FormData();
+            imageData.append('image', imageFile);
 
-        //     const imageRes = await axios.post(imageHostingApi, imageData, {
-        //         headers: {
-        //             'Content-Type': 'multipart/form-data',
-        //         },
-        //     });
+            const imageRes = await axios.post(imageHostingApi, imageData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
 
-        //     const imageUrl = imageRes.data.data.url;
-        //     const date = new Date()
-        //     const year = date.getFullYear()
-        //     const month = date.getMonth()
-        //     const day = date.getDay()
+            const imageUrl = imageRes.data.data.url;
+            const date = new Date()
+            const year = date.getFullYear()
+            const month = date.getMonth()
+            const day = date.getDay()
 
-        //     const data = {
-        //         reviewerName,
-        //         reviewerEmail:user?.email,
-        //         universityName,
-        //         ratingPoint,
-        //         scholarshipName,
-        //         universityImage: image,
-        //         reviewerComments,
-        //         reviewerImage: imageUrl,
-        //         reviewDate: {
-        //             year: year,
-        //             month: month,
-        //             day: day
-        //         }
-        //     }; 
+            const data = {
+                reviewerName,
+                reviewerEmail: user?.email,
+                universityName,
+                ratingPoint,
+                scholarshipName,
+                universityImage: image,
+                reviewerComments,
+                reviewerImage: imageUrl,
+                reviewDate: {
+                    year: year,
+                    month: month,
+                    day: day
+                }
+            };
 
-        //     const res = await axiosSecure.post('/reviews', data)
-        // toast.success('review successful')
-        //     if (res.data.insertedId) {
-        //         Swal.fire({
-        //             title: "success !",
-        //             text: `review added successfully !`,
-        //             icon: "success"
-        //         }); 
-        //     }
+            // const res = await axiosSecure.post('/reviews', data) 
+            const res = await axiosSecure.post('reviews', data)
+            console.log(res.data)
+            
+            if (res.data.insertedId) {
+                
+                Swal.fire({
+                    title: "success !",
+                    text: `review added successfully !`,
+                    icon: "success"
+                }); 
+                navigate(`/dashboard/apply/${_id}`)
+            }
 
-        // } catch (error) {
-        //     console.error('Error uploading the image or submitting the form:', error);
-        // }
+        } catch (error) {
+            console.error('Error uploading the image or submitting the form:', error);
+        }
 
         document.getElementById("my_modal_5").close();
     }
 
     return (
         <div>
-            <ToastContainer autoClose={1000}></ToastContainer>
+             
             <div className="shadow-lg p-4 md:flex gap-6  ">
                 <Helmet>
                     <title>SM || Scholarship Details</title>
@@ -120,7 +123,7 @@ const ScholarshipDetails = () => {
                     <p className="border-b-2 border-yellow-500 my-2"></p>
                     <div className=" flex justify-between">
 
-                        <Link> <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Apply Now</button></Link>
+                          <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Apply Now</button> 
 
                         <Link to={-1}> <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md my-3 text-white font-bold">Back</button></Link>
                     </div>
@@ -140,7 +143,7 @@ const ScholarshipDetails = () => {
                             <p>Rating point</p>
                             <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="ratingPoint" placeholder="Rating point" id="" required />
                         </div>
-                        {ratingPointError && <p className="text-red-500">{ratingPointError}</p>}
+                        {/* {ratingPointError && <p className="text-red-500">{ratingPointError}</p>} */}
                         <div>
                             <p>Reviewer image</p>
                             <input type="file" name="image" id="image" className="border-2 rounded-md w-full px-4 py-2 mb-2" required />
@@ -156,7 +159,9 @@ const ScholarshipDetails = () => {
                             </form>
                         </div>
                     </div>
-                    <Link to={`/dashboard/apply/${_id}`}>  <input type="submit" value='Next' className="btn -mt-12 bg-yellow-500 hover:bg-yellow-600 text-white font-bold absolute" /></Link>
+                    {/* <Link  to={`/dashboard/apply/${_id}`}>  */}
+                     <input type="submit" value='Next' className="btn -mt-12 bg-yellow-500 hover:bg-yellow-600 text-white font-bold absolute" />
+                     {/* </Link> */}
 
 
                 </form>

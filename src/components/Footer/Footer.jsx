@@ -15,9 +15,9 @@ const Footer = () => {
                 <nav>
                     <h6 className="footer-title">Social</h6>
                     <div className="grid grid-flow-col gap-4">
-                        <a className="text-3xl"> <IoLogoTwitter></IoLogoTwitter></a>
-                        <a className="text-3xl"> <FaFacebookSquare></FaFacebookSquare></a>
-                        <a className="text-3xl"> <IoLogoYoutube></IoLogoYoutube></a>
+                        <a href="" className="text-3xl"> <IoLogoTwitter></IoLogoTwitter></a>
+                        <a href="" className="text-3xl"> <FaFacebookSquare></FaFacebookSquare></a>
+                        <a href=""  className="text-3xl"> <IoLogoYoutube></IoLogoYoutube></a>
                     </div>
                 </nav>
                 <nav>
