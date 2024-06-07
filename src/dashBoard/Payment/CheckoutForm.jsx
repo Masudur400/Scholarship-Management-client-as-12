@@ -4,6 +4,7 @@ import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import PropTypes from 'prop-types'
 import useAuth from "../../components/Hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const CheckoutForm = ({totalFee,_id}) => {
@@ -14,6 +15,7 @@ const CheckoutForm = ({totalFee,_id}) => {
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('')
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const stripe = useStripe()
     const elements = useElements()
@@ -86,7 +88,7 @@ const CheckoutForm = ({totalFee,_id}) => {
                     text: `payment successfully !`,
                     icon: "success"
                   });
-                //   navigate('/dashboard/paymentHistory')
+                  navigate('/dashboard/myApplication')
               }
 
             }
