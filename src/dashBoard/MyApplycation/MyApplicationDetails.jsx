@@ -91,11 +91,11 @@ const MyApplicationDetails = () => {
                         <Link to={-1}> <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md my-3 text-white font-bold">Back</button></Link>
 
                         <div className="tooltip tooltip-top" data-tip="Edit">
-                            <Link to={`/dashboard/editApplication/${_id}`}><button className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><FaEdit /> </button></Link>
+                            <Link to={`/dashboard/editApplication/${_id}`}><button disabled={ status === 'processing' || status==='completed'} className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><FaEdit /> </button></Link>
                         </div>
 
                         <div className="tooltip tooltip-top" data-tip="Delete">
-                            <button onClick={() => handleDeleteApplication(details)} className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><MdOutlineDeleteForever /> </button>
+                            <button onClick={() => handleDeleteApplication(details)}  disabled={ status === 'processing' || status==='completed'} className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><MdOutlineDeleteForever /> </button>
                         </div>
 
                     </div>

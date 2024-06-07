@@ -34,6 +34,7 @@ import Payment from './dashBoard/Payment/Payment';
 import MyApplycation from './dashBoard/MyApplycation/MyApplycation';
 import MyApplicationDetails from './dashBoard/MyApplycation/MyApplicationDetails';
 import EditApplication from './dashBoard/MyApplycation/EditApplication';
+import MyReviews from './dashBoard/MyReviews/MyReviews';
 
 
 const router = createBrowserRouter([
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
         path:'editApplication/:id',
         element:<EditApplication></EditApplication>,
         loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+      }, 
+      {
+        path:'myReviews',
+        element:<MyReviews></MyReviews>
       }
       
 

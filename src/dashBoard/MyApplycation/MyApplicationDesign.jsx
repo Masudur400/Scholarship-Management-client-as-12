@@ -14,7 +14,7 @@ const MyApplicationDesign = ({ application, idx  }) => {
     return (
         <>
 
-            <tr>
+            <tr className='hover:shadow-md'>
                 <td> {idx + 1} </td>
                 <td> University Name: {applicantUniversityName} </td>
                 <td>
@@ -24,8 +24,7 @@ const MyApplicationDesign = ({ application, idx  }) => {
                     <p>
                         University City: {universityCity}
                     </p>
-                </td>
-                <td>Application Feedback </td>
+                </td> 
                 <td>
                     <p>
                         Subject Category: {applicantSubjectCategory}

@@ -66,9 +66,7 @@ const EditApplication = () => {
     } 
 
     return (
-        <div className="my-10 mx-5">
-            
-            
+        <div className="my-10 mx-5">  
             <Helmet>
                 <title>SM || update application</title>
             </Helmet>

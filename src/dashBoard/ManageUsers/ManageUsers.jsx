@@ -86,6 +86,7 @@ const ManageUsers = () => {
                 <title>SM || Manage Users</title>
             </Helmet>
             <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-5">Manage Users</h3>
+            <div className="md:w-1/5 mx-auto border border-yellow-500 my-2"></div>
             <div>
                 <div className="overflow-x-auto shadow-2xl  m-5 min-h-screen rounded-md">
                     <table className="table">
