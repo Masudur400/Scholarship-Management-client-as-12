@@ -69,20 +69,13 @@ const CheckoutForm = ({totalFee,_id}) => {
             if(paymentIntent.status === 'succeeded'){ 
                 setTransactionId(paymentIntent.id)
 
-                const date = new Date()
-                const year = date.getFullYear()
-                const month = date.getMonth()
-                const day = date.getDay()
+                const date = new Date() 
 
                 const data = {
                     email:user?.email,
                     applicationFees: totalFee,
                     transactionId: paymentIntent.id, 
-                    paymentDate: {
-                        year: year,
-                        month: month,
-                        day: day
-                    },  
+                    paymentDate:date,
                     ScholarshipId:_id
                 }
               const res= await  axiosSecure.post('/payments', data)  

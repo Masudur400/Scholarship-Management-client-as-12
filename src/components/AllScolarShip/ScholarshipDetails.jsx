@@ -51,10 +51,7 @@ const ScholarshipDetails = () => {
             });
 
             const imageUrl = imageRes.data.data.url;
-            const date = new Date()
-            const year = date.getFullYear()
-            const month = date.getMonth()
-            const day = date.getDay()
+            const date = new Date() 
 
             const data = {
                 reviewerName,
@@ -65,11 +62,7 @@ const ScholarshipDetails = () => {
                 universityImage: image,
                 reviewerComments,
                 reviewerImage: imageUrl,
-                reviewDate: {
-                    year: year,
-                    month: month,
-                    day: day
-                }
+                reviewDate:date
             };
 
             // const res = await axiosSecure.post('/reviews', data) 

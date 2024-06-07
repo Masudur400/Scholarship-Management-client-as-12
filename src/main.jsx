@@ -32,6 +32,7 @@ import ManageScholarshipDetails from './dashBoard/ManageSchoralship/ManageSchola
 import Apply from './dashBoard/Apply/Apply'; 
 import Payment from './dashBoard/Payment/Payment';
 import MyApplycation from './dashBoard/MyApplycation/MyApplycation';
+import MyApplicationDetails from './dashBoard/MyApplycation/MyApplicationDetails';
 
 
 const router = createBrowserRouter([
@@ -118,6 +119,11 @@ const router = createBrowserRouter([
       {
         path:'myApplication',
         element:<MyApplycation></MyApplycation>
+      },
+      {
+        path:'myApplicationDetails/:id',
+        element:<MyApplicationDetails></MyApplicationDetails>,
+        loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       }
       
 

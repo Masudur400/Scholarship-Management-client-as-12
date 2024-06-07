@@ -60,9 +60,7 @@ const Apply = () => {
             const imageUrl = imageRes.data.data.url;
 
             const date = new Date()
-            const year = date.getFullYear()
-            const month = date.getMonth()
-            const day = date.getDay()
+             
             const parsfee = parseInt(applicationFees)
             const parscharge = parseInt(serviceCharge)
             const totalFee = parsfee + parscharge
@@ -88,13 +86,8 @@ const Apply = () => {
                 UserEmail,
                 userName,
                 status: 'pending',
-                applicantImage: imageUrl,
-                applicantDate: {
-                    year: year,
-                    month: month,
-                    day: day
-                },
-                normalDate: date
+                applicantImage: imageUrl, 
+                applicantDate: date
             };
 
 
