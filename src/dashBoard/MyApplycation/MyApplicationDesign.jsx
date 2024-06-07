@@ -36,10 +36,10 @@ const MyApplicationDesign = ({ application, idx }) => {
                 </td>
                 <td>
                     <p>
-                        Application Fees: {applicationFees}
+                        Application Fees: {applicationFees} $
                     </p>
                     <p>
-                        Service charge: {serviceCharge}
+                        Service charge: {serviceCharge} $
                     </p>
                 </td>
                 <td>Application Status: {status}</td>

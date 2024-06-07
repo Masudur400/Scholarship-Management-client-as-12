@@ -3,20 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import MyApplicationDesign from "./MyApplicationDesign";
+import useApplications from "../../components/Hooks/useApplications";
 
 
-const MyApplycation = () => {
+const MyApplycation = () => { 
 
-    const { user } = useAuth()
-    const axiosSecure = useAxiosSecure()
-
-    const { data: applications = [], refetch, } = useQuery({
-        queryKey: ['applies', user?.email],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/applies?email=${user?.email}`)
-            return res.data
-        }
-    })
+    const [applications] = useApplications() 
+    
 
     return (
         <div className="px-6">
