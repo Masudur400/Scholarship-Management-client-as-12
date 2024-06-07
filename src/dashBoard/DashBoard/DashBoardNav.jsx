@@ -8,7 +8,7 @@ const DashBoardNav = () => {
         <li><NavLink to="/" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 font-bold btn btn-sm border-none underline' : ''} ><FaHome></FaHome> Home</NavLink></li>
 
         {/* Admin rout  */}
-        <li><NavLink to="/dashboard/dashboardProfile" className={({ isActive }) => isActive ? 'underline  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Profile</NavLink></li>
+        <li><NavLink to="/dashboard/dashboardProfile" className={({ isActive }) => isActive ? 'underline  text-white bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >My Profile</NavLink></li>
 
         <li><NavLink to="/dashboard/myApplication" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >My Application</NavLink></li>
 
