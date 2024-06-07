@@ -3,9 +3,8 @@ import { Helmet } from "react-helmet";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
-import { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react"; 
+import Swal from "sweetalert2";
 
 
 
@@ -64,10 +63,15 @@ const Apply = () => {
             const year = date.getFullYear()
             const month = date.getMonth()
             const day = date.getDay()
+            const parsfee = parseInt(applicationFees)
+            const parscharge = parseInt(serviceCharge)
+            const totalFee = parsfee + parscharge
 
             const data = {
                 applicantPhoneNumber,
-                applicationFees: parseInt(applicationFees + serviceCharge),
+                applicationFees:applicationFees ,
+                serviceCharge:serviceCharge,
+                totalFee: totalFee,
                 applicantUniversityName,
                 applicantAddress,
                 applicantName,
@@ -96,7 +100,11 @@ const Apply = () => {
 
             const res = await axiosSecure.post('/applies', data)
             if (res.data.insertedId) {
-                toast.success('accept your data')
+                Swal.fire({
+                    title: "success !",
+                    text: `accepted your data !`,
+                    icon: "success"
+                }); 
                 navigate(`/dashboard/payment/${_id}`)
             }
 
@@ -107,7 +115,7 @@ const Apply = () => {
 
     return (
         <div className="my-10 mx-5">
-            <ToastContainer autoClose={1000}></ToastContainer>
+            
             <Helmet>
                 <title>SM || Apply Scholarship</title>
             </Helmet>

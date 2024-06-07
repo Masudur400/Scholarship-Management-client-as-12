@@ -80,7 +80,7 @@ const ScholarshipDetails = () => {
                 
                 Swal.fire({
                     title: "success !",
-                    text: `review added successfully !`,
+                    text: `review accepted !`,
                     icon: "success"
                 }); 
                 navigate(`/dashboard/apply/${_id}`)
