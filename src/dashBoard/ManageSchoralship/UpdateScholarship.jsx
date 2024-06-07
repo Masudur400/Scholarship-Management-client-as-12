@@ -5,6 +5,7 @@ import axios from "axios";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { FaArrowLeft } from "react-icons/fa";
+import Loading from "../../components/Loading/Loading";
 
 
 
@@ -15,7 +16,7 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const UpdateScholarship = () => {
 
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
 
@@ -103,6 +104,10 @@ const UpdateScholarship = () => {
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);
         }
+    }
+
+    if(loading){
+        return <Loading></Loading>
     }
 
     return (

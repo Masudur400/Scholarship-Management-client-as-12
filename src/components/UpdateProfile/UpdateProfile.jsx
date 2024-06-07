@@ -2,10 +2,11 @@ import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import Loading from "../Loading/Loading";
 
- 
+
 const UpdateProfile = () => {
-    const {  user } =  useAuth();
+    const { user, loading } = useAuth();
     console.log(user)
     const navigate = useNavigate();
 
@@ -17,20 +18,22 @@ const UpdateProfile = () => {
 
         updateProfile(user, {
             displayName: name,
-            photoURL: photo 
+            photoURL: photo
         })
-        navigate('/profile') 
-         
+        navigate('/profile')
+
     }
 
-
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className="min-h-screen flex justify-center items-center">
             <Helmet>
                 <title>SM || UpdateProfile</title>
             </Helmet>
-            <div  className="w-4/5 lg:w-1/3 md:w-2/3 mx-auto bg-gray-100 shadow-xl p-5 rounded-lg my-20">
+            <div className="w-4/5 lg:w-1/3 md:w-2/3 mx-auto bg-gray-100 shadow-xl p-5 rounded-lg my-20">
                 <h2 className="text-2xl font-bold text-center text-yellow-600 my-3">Update Profile</h2>
 
                 <form onSubmit={handleUpdate} >

@@ -3,9 +3,10 @@ import { MdLightMode, MdLogout, MdNightlight } from "react-icons/md";
 import logo from '../../assets/images/scholarships-bg-3.png';
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import Loading from "../Loading/Loading";
 
 const NavBar = () => {
-    const { user, logOut } = useAuth()
+    const { user, logOut, loading } = useAuth()
 
     const links = <>
         <li> <NavLink to='/' className={({ isActive }) => isActive ? 'btn btn-sm text-yellow-600 underline font-bold' : ''}>Home</NavLink></li>
@@ -49,6 +50,10 @@ const NavBar = () => {
         <li><Link to="/dashboard/dashboardProfile">DashBoard</Link></li> 
         <li><p onClick={handleLogOut} className="flex font-bold">Logout <MdLogout></MdLogout></p></li>
     </>
+
+    if(loading){
+        return <Loading></Loading>
+    }
 
     return (
         <div className="shadow-lg fixed z-10 w-full top-0 px-4">

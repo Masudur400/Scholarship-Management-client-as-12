@@ -5,6 +5,7 @@ import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { useState } from "react"; 
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading/Loading";
 
 
 
@@ -18,7 +19,7 @@ const Apply = () => {
     const [phoneNumberError, setPhoneNumberError] = useState('')
     const { _id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
 
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure()
 
     const handleAddScholarship = async (e) => {
@@ -105,6 +106,10 @@ const Apply = () => {
             console.error('Error uploading the image or submitting the form:', error);
         }
     };
+
+    if(loading){
+        return <Loading></Loading>
+    }
 
     return (
         <div className="my-10 mx-5">

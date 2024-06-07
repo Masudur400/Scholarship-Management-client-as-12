@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState } from "react"; 
 import useAuth from "../Hooks/useAuth"; 
 import Swal from "sweetalert2";
+import Loading from "../Loading/Loading";
 
 
 
@@ -14,7 +15,7 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const ScholarshipDetails = () => {
 
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
     const axiosSecure = useAxiosSecure()
     const scholarShips = useLoaderData()
     const navigate = useNavigate()
@@ -84,6 +85,10 @@ const ScholarshipDetails = () => {
         }
 
         document.getElementById("my_modal_5").close();
+    }
+
+    if(loading){
+        return <Loading></Loading>
     }
 
     return (

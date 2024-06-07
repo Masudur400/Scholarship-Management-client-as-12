@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
 
 
 const ManageUsers = () => {
@@ -13,7 +14,7 @@ const ManageUsers = () => {
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
 
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, isPending } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -77,6 +78,10 @@ const ManageUsers = () => {
             navigate('/dashboard/users')
             document.getElementById("my_modal_5").close();
         }
+    }
+
+    if(isPending){
+        return <Loading></Loading>
     }
 
 

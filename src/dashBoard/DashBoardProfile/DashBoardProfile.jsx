@@ -2,14 +2,15 @@ import { Helmet } from "react-helmet";
 import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/Loading/Loading";
 
 
  const DashBoardProfile = () => {
-    const { user } =  useAuth() 
+    const { user, loading } =  useAuth() 
 
     const axiosSecure = useAxiosSecure()
 
-    const { data: users = []} = useQuery({
+    const { data: users = [], isPending} = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -18,6 +19,10 @@ import { useQuery } from "@tanstack/react-query";
     })
 
     const logdinUser = users.find(logduser => logduser.email === user?.email) 
+
+    if(loading || isPending){
+        return <Loading></Loading>
+    }
 
 
     return (

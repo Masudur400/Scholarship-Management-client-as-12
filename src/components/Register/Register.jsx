@@ -6,6 +6,7 @@ import { useState } from "react";
 import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa"; 
 import { updateProfile } from "firebase/auth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import Loading from "../Loading/Loading";
 
  
 
@@ -20,7 +21,7 @@ const Register = () => {
     const [userSuccess, setUserSuccess] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    const { createUser,googleLogin } =  useAuth()
+    const { createUser,googleLogin, loading } =  useAuth()
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -118,7 +119,9 @@ const Register = () => {
             })
     }
 
-
+if(loading){
+    return <Loading></Loading>
+}
 
     return (
         <div className="min-h-screen">

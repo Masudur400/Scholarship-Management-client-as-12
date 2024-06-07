@@ -3,12 +3,13 @@ import useAuth from '../../components/Hooks/useAuth';
 import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
+import Loading from '../../components/Loading/Loading';
 
 const imageHostingKey = import.meta.env.VITE_image_hosting_key;
 const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const AddScholarShip = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const  axiosSecure = useAxiosSecure()
 
     const handleAddScholarship = async (e) => {
@@ -73,6 +74,10 @@ const AddScholarShip = () => {
             console.error('Error uploading the image or submitting the form:', error);
         }
     };
+
+    if(loading){
+        return <Loading></Loading>
+    }
 
     return (
         <div className="my-10 mx-5">

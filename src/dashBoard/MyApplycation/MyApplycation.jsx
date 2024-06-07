@@ -1,11 +1,15 @@
 import MyApplicationDesign from "./MyApplicationDesign";
 import useApplications from "../../components/Hooks/useApplications";
+import Loading from "../../components/Loading/Loading";
 
 
 const MyApplycation = () => { 
 
-    const [applications] = useApplications() 
-    
+    const [applications,,isPending,loading] = useApplications() 
+
+    if(isPending || loading){
+        return <Loading></Loading>
+    }
 
     return (
         <div className="md:px-6 m-5">

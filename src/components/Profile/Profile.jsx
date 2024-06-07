@@ -1,15 +1,19 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import Loading from "../Loading/Loading";
 
  
 const Profile = () => {
-    const { user } =  useAuth() 
+    const { user, loading } =  useAuth() 
 
     const date = new Date(user?.metadata?.creationTime)
     const formattedDateOnly = date.toLocaleDateString()
     const formattedDate = date.toLocaleString();
 
+    if(loading){
+        return <Loading></Loading>
+    }
 
     return (
         <div className="flex justify-center items-center min-h-screen">

@@ -5,11 +5,12 @@ import PropTypes from 'prop-types'
 import useAuth from "../../components/Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
 
 
 const CheckoutForm = ({totalFee,_id}) => {
 
-    const {user} = useAuth()
+    const {user, loading} = useAuth()
 
     const [error, setError] = useState('')
     const [clientSecret, setClientSecret] = useState('')
@@ -92,11 +93,11 @@ const CheckoutForm = ({totalFee,_id}) => {
               }
 
             }
-        }
+        }  
+    }
 
-
-
-
+    if(loading){
+        return <Loading></Loading>
     }
 
     return (

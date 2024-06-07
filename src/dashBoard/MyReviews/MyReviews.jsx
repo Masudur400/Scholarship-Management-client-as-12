@@ -1,10 +1,15 @@
 import useReviews from "../../components/Hooks/useReviews";
+import Loading from "../../components/Loading/Loading";
 import MyReviewsDesign from "./MyReviewsDesign";
 
  
 const MyReviews = () => {
 
-    const [myReviews, refetch] = useReviews()
+    const [myReviews, refetch, loading, isPending] = useReviews()
+
+    if(loading || isPending){
+        return <Loading></Loading>
+    }
 
     return (
         <div className="md:px-6 m-5">

@@ -5,13 +5,14 @@ import { FaEdit } from "react-icons/fa";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading/Loading";
 
 
 const ManageScholarship = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const { data: scholarships = [], refetch } = useQuery({
+    const { data: scholarships = [], refetch, isPending } = useQuery({
         queryKey: ['scholarships'],
         queryFn: async () => {
             const res = await axiosSecure.get('/scholarships')
@@ -44,6 +45,10 @@ const ManageScholarship = () => {
                     })
             }
         });
+    }
+
+    if(isPending){
+        return <Loading></Loading>
     }
    
 

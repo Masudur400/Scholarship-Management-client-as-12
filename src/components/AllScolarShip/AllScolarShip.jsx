@@ -3,6 +3,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Scholarship from "./Scholarship";
 import { useEffect, useState } from "react";
+import Loading from "../Loading/Loading";
 
 
 const AllScolarShip = () => {
@@ -12,7 +13,7 @@ const AllScolarShip = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const { data: scholarships = []} = useQuery({
+    const { data: scholarships = [], isPending} = useQuery({
         queryKey: ['scholarships'],
         queryFn: async () => {
             const res = await axiosSecure.get('/scholarships') 
@@ -40,7 +41,9 @@ const AllScolarShip = () => {
         console.log(searchText)
     }
 
-
+if(isPending){
+    return <Loading></Loading>
+}
 
     return (
         <div className="my-10">

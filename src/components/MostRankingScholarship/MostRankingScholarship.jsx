@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 import SingleScholarship from "./SingleScholarship";
+import Loading from "../Loading/Loading";
 
  
 const MostRankingScholarship = () => {
@@ -9,7 +10,7 @@ const MostRankingScholarship = () => {
     const axiosPublic = useAxiosPublic()
     const [sortedScholarship, setSortedScholarship] = useState([]);
 
-    const {data : scholarships =[]}=useQuery({
+    const {data : scholarships =[], isPending}=useQuery({
         queryKey:['scholarships'],
         queryFn:async () =>{
             const res = await axiosPublic.get('/scholarships')
@@ -26,6 +27,9 @@ const MostRankingScholarship = () => {
 
     
     // Top Scholarship
+    if(isPending){
+      return <Loading></Loading>
+    }
 
     return (
         <div>

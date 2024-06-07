@@ -5,10 +5,11 @@ import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import Loading from "../Loading/Loading";
 
  
 const Login = () => {
-    const { login, googleLogin } = useAuth();
+    const { login, googleLogin, loading } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const axiosPublic = useAxiosPublic()
 
@@ -83,7 +84,9 @@ const Login = () => {
             })
     }
 
-     
+     if(loading){
+        return <Loading></Loading>
+     }
 
     return (
         <div className="min-h-screen"> 
