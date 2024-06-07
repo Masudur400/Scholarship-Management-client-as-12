@@ -16,7 +16,7 @@ const MyApplycation = () => {
                     <thead>
                         <tr>
 
-                            <td></td>
+                            <td>#</td>
                             <td>universityName</td>
                             <td>university country & city</td> 
                             <td>subject & degree</td>

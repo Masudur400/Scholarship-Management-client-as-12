@@ -10,8 +10,7 @@ const NavBar = () => {
     const links = <>
         <li> <NavLink to='/' className={({ isActive }) => isActive ? 'btn btn-sm text-yellow-600 underline font-bold' : ''}>Home</NavLink></li>
         <li> <NavLink to='/allScholarShip' className={({ isActive }) => isActive ? 'btn btn-sm text-yellow-600 underline font-bold' : ''}>All Scholarship</NavLink></li>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
+           
     </>
 
 

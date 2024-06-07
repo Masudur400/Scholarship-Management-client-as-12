@@ -15,7 +15,7 @@ const MyReviews = () => {
                     <thead>
                         <tr>
 
-                            <td></td>
+                            <td>#</td>
                             <td>University Image</td>
                             <td>Reviewer Name</td>
                             <td>Scholarship name</td>

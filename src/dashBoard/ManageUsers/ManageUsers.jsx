@@ -93,6 +93,7 @@ const ManageUsers = () => {
                         {/* head */}
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Image</th>
                                 <th>User Name</th>
                                 <th>User Email</th>
@@ -105,14 +106,17 @@ const ManageUsers = () => {
                         <tbody className="">
 
                             {
-                                users.map(user => <tr key={user._id} className="hover:shadow-md">
+                                users.map((user, idx) => <tr key={user._id} className="hover:shadow-md">
+                                    <td>
+                                        {idx+1}
+                                    </td>
                                     <td>
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
                                                 <img src={user?.image} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
-                                    </td>
+                                    </td> 
                                     <td>
                                         {user?.name}
                                     </td>
