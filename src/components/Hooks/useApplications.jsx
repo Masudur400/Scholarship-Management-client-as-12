@@ -15,7 +15,7 @@ const useApplications = () => {
             return res.data
         }
     })
-    return [applications]
+    return [applications,refetch]
 };
 
 export default useApplications;

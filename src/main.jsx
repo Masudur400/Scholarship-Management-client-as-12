@@ -33,6 +33,7 @@ import Apply from './dashBoard/Apply/Apply';
 import Payment from './dashBoard/Payment/Payment';
 import MyApplycation from './dashBoard/MyApplycation/MyApplycation';
 import MyApplicationDetails from './dashBoard/MyApplycation/MyApplicationDetails';
+import EditApplication from './dashBoard/MyApplycation/EditApplication';
 
 
 const router = createBrowserRouter([
@@ -123,6 +124,11 @@ const router = createBrowserRouter([
       {
         path:'myApplicationDetails/:id',
         element:<MyApplicationDetails></MyApplicationDetails>,
+        loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+      },
+      {
+        path:'editApplication/:id',
+        element:<EditApplication></EditApplication>,
         loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       }
       

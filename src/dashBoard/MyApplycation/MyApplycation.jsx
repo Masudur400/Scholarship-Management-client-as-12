@@ -1,7 +1,3 @@
-
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../components/Hooks/useAuth";
-import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import MyApplicationDesign from "./MyApplicationDesign";
 import useApplications from "../../components/Hooks/useApplications";
 
