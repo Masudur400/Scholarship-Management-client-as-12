@@ -8,7 +8,7 @@ const MyReviews = () => {
 
     return (
         <div className="md:px-6 m-5">
-            <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-3">My Reviews</h3>
+            <h3 className="text-lg md:text-2xl font-bold text-yellow-500 text-center my-3">My Reviews</h3>
             <div className="md:w-1/5 mx-auto border border-yellow-500 my-2"></div>
             <div className="overflow-x-auto min-h-screen">
                 <table className="table table-xs table-pin-rows table-pin-cols">

@@ -109,7 +109,7 @@ const MyReviewsDesign = ({review, idx, refetch}) => {
             <td className='text-center'> {formattedDateOnly}</td> 
              
              
-            <td className='justify-between flex  '>
+            <td className='justify-between flex  gap-2'>
            {/* <div className="tooltip tooltip-bottom"  data-tip="Details">
            <Link to={``}><button className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><TbListDetails></TbListDetails> </button></Link>
            </div> */}

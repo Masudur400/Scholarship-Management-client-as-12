@@ -79,7 +79,7 @@ const AddScholarShip = () => {
             <Helmet>
                 <title>SM || Add Scholarship</title>
             </Helmet>
-            <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-3">Add Scholarship</h3>
+            <h3 className="text-lg md:text-2xl font-bold text-yellow-500 text-center my-3">Add Scholarship</h3>
             <div className="md:w-1/5 mx-auto border border-yellow-500 my-2"></div>
             <div className="w-4/5 p-5 mx-auto shadow-2xl border rounded-md">
                 <form onSubmit={handleAddScholarship}>
