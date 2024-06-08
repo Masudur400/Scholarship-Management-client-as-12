@@ -37,6 +37,7 @@ import EditApplication from './dashBoard/MyApplycation/EditApplication';
 import MyReviews from './dashBoard/MyReviews/MyReviews';
 import AllReview from './dashBoard/AllReview/AllReview';
 import AllAppliedScholarship from './dashBoard/AllAppliedScholarship/AllAppliedScholarship';
+import Details from './dashBoard/AllAppliedScholarship/Details';
 
 
 const router = createBrowserRouter([
@@ -145,6 +146,11 @@ const router = createBrowserRouter([
       {
         path:'allAppliedScholarship',
         element:<AllAppliedScholarship></AllAppliedScholarship>
+      },
+      {
+        path:'details/:id',
+        element:<Details></Details>,
+        loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       }
       
 

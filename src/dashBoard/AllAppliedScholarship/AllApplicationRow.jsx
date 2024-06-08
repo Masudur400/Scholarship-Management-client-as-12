@@ -1,26 +1,25 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
-import { TbListDetails } from 'react-icons/tb';
-import { FaEdit } from 'react-icons/fa';
 import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 
 const AllApplicationRow = ({ apply, idx, refetch }) => {
 
-    const axiosSecure  = useAxiosSecure()
+    const axiosSecure = useAxiosSecure()
 
     const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, normalDate, feedBack } = apply
 
-    const handleFeedBack = async(e) => {
+    // feedBack 
+    const handleFeedBack = async (e) => {
         e.preventDefault()
 
         const form = new FormData(e.currentTarget);
-        const feedBack = form.get('feedBack'); 
+        const feedBack = form.get('feedBack');
 
-        try { 
-            const data = {applicantName,applicantPhoneNumber,applicantUniversityName,applicantAddress,gender,applicantSubjectCategory,applicantScholarshipCategory,applicantDegree,SSCresult,HSCresult,status:status,feedBack:feedBack,applicantImage:applicantImage} 
+        try {
+            const data = { applicantName, applicantPhoneNumber, applicantUniversityName, applicantAddress, gender, applicantSubjectCategory, applicantScholarshipCategory, applicantDegree, SSCresult, HSCresult, status, feedBack: feedBack, applicantImage }
 
-            
+
             const res = await axiosSecure.patch(`/applies/${_id}`, data)
             if (res.data.modifiedCount > 0) {
                 refetch()
@@ -29,25 +28,26 @@ const AllApplicationRow = ({ apply, idx, refetch }) => {
                     text: `feedBack successfully !`,
                     icon: "success"
                 });
-                
+
             }
 
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);
-        }  
+        }
         document.getElementById("my_modal_5").close();
     }
 
-    const handleStatus = async(e) => {
+    // status
+    const handleStatus = async (e) => {
         e.preventDefault()
 
         const form = new FormData(e.currentTarget);
-        const status = form.get('status'); 
+        const status = form.get('status');
 
-        try { 
-            const data = {applicantName,applicantPhoneNumber,applicantUniversityName,applicantAddress,gender,applicantSubjectCategory,applicantScholarshipCategory,applicantDegree,SSCresult,HSCresult,status:status,feedBack:feedBack,applicantImage:applicantImage} 
+        try {
+            const data = { applicantName, applicantPhoneNumber, applicantUniversityName, applicantAddress, gender, applicantSubjectCategory, applicantScholarshipCategory, applicantDegree, SSCresult, HSCresult, status: status, feedBack, applicantImage }
 
-            
+
             const res = await axiosSecure.patch(`/applies/${_id}`, data)
             if (res.data.modifiedCount > 0) {
                 refetch()
@@ -56,15 +56,41 @@ const AllApplicationRow = ({ apply, idx, refetch }) => {
                     text: `status update successfully !`,
                     icon: "success"
                 });
-                
+
             }
 
         } catch (error) {
             console.error('Error uploading the image or submitting the form:', error);
-        }  
-
-
+        }
         document.getElementById("my_modal_3").close();
+    }
+
+    // delete
+    const handleDeleteApply = apply => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to delete applied...!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) { 
+                axiosSecure.delete(`/applies/${apply?._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) { 
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: ` applied has been deleted.`,
+                                icon: "success"
+                            });
+                             
+                        }
+                    })
+            }
+        });
     }
 
     return (
@@ -99,12 +125,13 @@ const AllApplicationRow = ({ apply, idx, refetch }) => {
                 </td>
 
                 <td><button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-sm">FeedBack</button></td>
+                
                 <td><button onClick={() => document.getElementById('my_modal_3').showModal()} className="btn btn-sm">{status}</button></td>
                 <td className='space-y-3 flex flex-col'>
 
-                    <Link to={``}><button className=" px-4 py-2 rounded-md  text-white bg-yellow-500 hover:bg-yellow-600">Details</button></Link>
+                    <Link to={`/dashboard/details/${_id}`}><button className=" px-4 py-2 rounded-md  text-white bg-yellow-500 hover:bg-yellow-600">Details</button></Link>
 
-                    <button className=" px-4 py-2 rounded-md  text-white bg-yellow-500 hover:bg-yellow-600">Cancel</button>
+                    <button onClick={()=>handleDeleteApply(apply)} className=" px-4 py-2 rounded-md  text-white bg-yellow-500 hover:bg-yellow-600">Cancel</button>
 
                 </td>
             </tr>
@@ -127,28 +154,28 @@ const AllApplicationRow = ({ apply, idx, refetch }) => {
                 </form>
             </dialog>
 
-            {/* status Modal  */} 
+            {/* status Modal  */}
             <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
                     <form method="dialog">
-                       
+
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
-                    <form onSubmit={handleStatus}> 
+                    <form onSubmit={handleStatus}>
                         <h2 className="font-bold text-yellow-500 text-center">Status</h2>
                         <div>
                             <p>Change Status</p>
-                            <select name='status' className="border-2 rounded-md w-full px-4 py-2 mb-2" required>
+                            <select name='status' defaultValue={status} className="border-2 rounded-md w-full px-4 py-2 mb-2" required>
                                 <option disabled selected>Select One</option>
                                 <option value="pending">pending</option>
                                 <option value="processing">processing</option>
                                 <option value="completed">completed</option>
                             </select>
-                        </div> 
-                    <input type="submit" value='Next' className="btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold " />
-                </form>
+                        </div>
+                        <input type="submit" value='Next' className="btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold " />
+                    </form>
                 </div>
-            </dialog> 
+            </dialog>
 
         </>
     );

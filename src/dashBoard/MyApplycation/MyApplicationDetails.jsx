@@ -4,6 +4,8 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2"; 
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 
 const MyApplicationDetails = () => {
@@ -19,6 +21,9 @@ const MyApplicationDetails = () => {
     const formattedDate = date.toLocaleString();
 
     const handleDeleteApplication = details => {
+        if(status === 'processing' || status === 'completed'){
+            return toast.error(`status : ${status} ! can not delete`)
+        }
         Swal.fire({
             title: "Are you sure?",
             text: "You want to delete application...!",
@@ -45,10 +50,16 @@ const MyApplicationDetails = () => {
         });
     }
 
+    const handleEdit =()=>{
+        if(status === 'processing' || status === 'completed'){
+            return toast.error(`status : ${status} ! can not Edit`)
+        }
+    }
+
 
     return (
         <div>
-
+<ToastContainer></ToastContainer>
             <div className="shadow-lg p-4 md:flex gap-6 m-5 ">
                 <Helmet>
                     <title>SM || my Application Details</title>
@@ -91,11 +102,11 @@ const MyApplicationDetails = () => {
                         <Link to={-1}> <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md my-3 text-white font-bold">Back</button></Link>
 
                         <div className="tooltip tooltip-top" data-tip="Edit">
-                            <Link to={`/dashboard/editApplication/${_id}`}><button disabled={ status === 'processing' || status==='completed'} className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><FaEdit /> </button></Link>
+                            {status === 'pending'? <Link to={`/dashboard/editApplication/${_id}`}><button className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><FaEdit /> </button></Link>: <button onClick={handleEdit} className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><FaEdit /> </button>}
                         </div>
 
                         <div className="tooltip tooltip-top" data-tip="Delete">
-                            <button onClick={() => handleDeleteApplication(details)}  disabled={ status === 'processing' || status==='completed'} className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><MdOutlineDeleteForever /> </button>
+                            <button onClick={() => handleDeleteApplication(details)}     className="  btn-ghost text-2xl text-red-500 border-red-200 bg-orange-200 px-4 py-2 rounded-md my-3"><MdOutlineDeleteForever /> </button>
                         </div>
 
                     </div>
