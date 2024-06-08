@@ -27,11 +27,11 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 if (result.user) {
-                    // Swal.fire({
-                    //     title: "Success!",
-                    //     text: "Login successfully!",
-                    //     icon: "success"
-                    // });
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Login successfully!",
+                        icon: "success"
+                    });
                     const userInfo ={
                         name:result.user?.displayName,
                         email:email,
@@ -40,13 +40,14 @@ const Login = () => {
                     }
                     axiosPublic.post('/users', userInfo)
                     .then(res =>{
-                        if(res.data.insertedId){
-                            Swal.fire({
-                                title: "Success!",
-                                text: "Login successfully!",
-                                icon: "success"
-                            });
-                        }
+                        console.log(res.data)
+                        // if(res.data.insertedId){
+                        //     Swal.fire({
+                        //         title: "Success!",
+                        //         text: "Login successfully!",
+                        //         icon: "success"
+                        //     });
+                        // }
                     })
                 }
 

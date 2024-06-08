@@ -14,6 +14,8 @@ const DashBoardNav = () => {
 
         <li><NavLink to="/dashboard/myReviews" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >My Reviews</NavLink></li>
 
+        <li><NavLink to="/dashboard/allReview" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >All Reviews</NavLink></li>
+
         <li><NavLink to="/dashboard/users" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Manage Users</NavLink></li>
 
         <li><NavLink to="/dashboard/addScholarship" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >Add Scholarship</NavLink></li>

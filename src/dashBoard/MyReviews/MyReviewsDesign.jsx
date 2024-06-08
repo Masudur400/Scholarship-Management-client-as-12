@@ -69,7 +69,7 @@ const MyReviewsDesign = ({review, idx, refetch}) => {
     const handleDelete = review =>{
         Swal.fire({
             title: "Are you sure?",
-            text: "You want to delete application...!",
+            text: "You want to delete review...!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
