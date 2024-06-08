@@ -84,6 +84,7 @@ const Apply = () => {
                 applicantDegree,
                 SSCresult,
                 HSCresult,
+                feedBack:'',
                 UserEmail,
                 userName,
                 status: 'pending',
@@ -128,7 +129,7 @@ const Apply = () => {
                         </div>
                         <div>
                             <p>Applicant phone number</p>
-                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" name="applicantPhoneNumber" placeholder="Applicant phone number" id="applicantPhoneNumber" required />
+                            <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="applicantPhoneNumber" placeholder="Applicant phone number" id="applicantPhoneNumber" required />
                             {phoneNumberError && <p className="text-red-500">{phoneNumberError}</p>}
                         </div>
                         <div>

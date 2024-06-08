@@ -36,6 +36,7 @@ import MyApplicationDetails from './dashBoard/MyApplycation/MyApplicationDetails
 import EditApplication from './dashBoard/MyApplycation/EditApplication';
 import MyReviews from './dashBoard/MyReviews/MyReviews';
 import AllReview from './dashBoard/AllReview/AllReview';
+import AllAppliedScholarship from './dashBoard/AllAppliedScholarship/AllAppliedScholarship';
 
 
 const router = createBrowserRouter([
@@ -140,6 +141,10 @@ const router = createBrowserRouter([
       {
         path:'allReview',
         element:<AllReview></AllReview>
+      },
+      {
+        path:'allAppliedScholarship',
+        element:<AllAppliedScholarship></AllAppliedScholarship>
       }
       
 

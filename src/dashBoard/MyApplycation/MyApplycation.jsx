@@ -25,6 +25,7 @@ const MyApplycation = () => {
                             <td>university country & city</td> 
                             <td>subject & degree</td>
                             <td>application fees & charge</td>
+                            <td>FeedBack</td>
                             <td>Application Status</td>
                             <td>Action</td> 
                         </tr>

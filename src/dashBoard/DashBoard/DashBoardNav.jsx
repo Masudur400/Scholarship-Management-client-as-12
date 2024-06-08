@@ -12,6 +12,8 @@ const DashBoardNav = () => {
 
         <li><NavLink to="/dashboard/myApplication" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >My Application</NavLink></li>
 
+        <li><NavLink to="/dashboard/allAppliedScholarship" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >All Applied Scholarship</NavLink></li>
+
         <li><NavLink to="/dashboard/myReviews" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >My Reviews</NavLink></li>
 
         <li><NavLink to="/dashboard/allReview" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none' : ''} >All Reviews</NavLink></li>

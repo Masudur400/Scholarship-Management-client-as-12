@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const MyApplicationDesign = ({ application, idx  }) => {
 
-    const { _id,applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, normalDate } = application
+    const { _id,applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, normalDate,feedBack } = application
 
    
 
@@ -41,6 +41,7 @@ const MyApplicationDesign = ({ application, idx  }) => {
                         Service charge: {serviceCharge} $
                     </p>
                 </td>
+                <td>{feedBack}</td>
                 <td>Application Status: {status}</td>
                 <td className='space-y-3 flex flex-col'>
                <div className="tooltip tooltip-bottom"  data-tip="Details">
