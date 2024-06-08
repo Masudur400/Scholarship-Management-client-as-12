@@ -84,7 +84,7 @@ const Apply = () => {
                 applicantDegree,
                 SSCresult,
                 HSCresult,
-                feedBack:'',
+                feedBack:'ok',
                 UserEmail,
                 userName,
                 status: 'pending',

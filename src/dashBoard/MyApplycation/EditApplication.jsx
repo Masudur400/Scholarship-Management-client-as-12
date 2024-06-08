@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../components/Hooks/useAxiosSecure"; 
+import useAxiosSecure from "../../components/Hooks/useAxiosSecure";  
 
  
 
@@ -15,10 +15,10 @@ const EditApplication = () => {
     const application = useLoaderData()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate }  = application
+    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate,feedBack }  = application
 
     const updateApplication = async(e) =>{
-        e.preventDefault()
+        e.preventDefault() 
 
         const form = new FormData(e.currentTarget);
         const applicantName = form.get('applicantName');
@@ -47,7 +47,7 @@ const EditApplication = () => {
 
             const imageUrl = imageRes?.data?.data?.url;
 
-            const data = {applicantName,applicantPhoneNumber,applicantUniversityName,applicantAddress,gender,applicantSubjectCategory,applicantScholarshipCategory,applicantDegree,SSCresult,HSCresult,applicantImage:imageUrl || applicantImage} 
+            const data = {applicantName,applicantPhoneNumber,applicantUniversityName,applicantAddress,gender,applicantSubjectCategory,applicantScholarshipCategory,applicantDegree,SSCresult,HSCresult,status:status,feedBack:feedBack,applicantImage:imageUrl || applicantImage} 
 
             
             const res = await axiosSecure.patch(`/applies/${_id}`, data)
@@ -70,6 +70,7 @@ const EditApplication = () => {
             <Helmet>
                 <title>SM || update application</title>
             </Helmet>
+             
             <h3 className="text-lg md:text-2xl font-bold text-yellow-600 text-center my-3">Edit Application</h3>
             <div className="w-4/5 p-5 mx-auto shadow-2xl border rounded-md">
             <Link to={-1}> <button data-tip="Back" className="tooltip tooltip-top bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md my-3 text-white font-bold"><FaArrowLeftLong></FaArrowLeftLong></button></Link>
