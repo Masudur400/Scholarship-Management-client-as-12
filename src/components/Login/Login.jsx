@@ -1,11 +1,12 @@
 import { useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import {  FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Loading from "../Loading/Loading";
+import { FcGoogle } from "react-icons/fc";
 
  
 const Login = () => {
@@ -118,7 +119,7 @@ const Login = () => {
                 <div className="divider my-5"></div>
                 <div className="mb-t">
                     <div>
-                        <button onClick={handleGoogleLogin} className=" text-2xl bg-gray-200 p-3 rounded-2xl flex gap-4 items-center w-full justify-center font-bold"><FaGoogle></FaGoogle>Google</button>
+                        <button onClick={handleGoogleLogin} className=" bg-gray-200 p-3 rounded-2xl flex gap-3 items-center w-full justify-center font-bold"><FcGoogle className="text-3xl"></FcGoogle> Google</button>
                          
                     </div>
                      
