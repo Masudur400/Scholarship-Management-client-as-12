@@ -1,9 +1,19 @@
 import { FaHome } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import useAdmin from "../../components/Hooks/useAdmin";
+import useModerator from "../../components/Hooks/useModerator";
 
 const DashBoardNav = () => {
 
+    const [isAdmin] = useAdmin()
+    const [isModerator] = useModerator()
+
+    console.log('admin', isAdmin)
+    console.log('moderator', isModerator)
+
     const links = <>
+
+
 
         <li><NavLink to="/" className={({ isActive }) => isActive ? '  text-white bg-yellow-500 hover:bg-yellow-400 font-bold btn btn-sm border-none underline' : ''} ><FaHome></FaHome> Home</NavLink></li>
 
