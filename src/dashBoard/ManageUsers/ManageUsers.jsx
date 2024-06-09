@@ -62,8 +62,7 @@ const ManageUsers = () => {
 
     const handleUpdateRole = async e => {
         e.preventDefault()
-        const currentRole = e.target.role.value
-        console.log(currentRole)
+        const currentRole = e.target.role.value 
 
         const data = { image: currentUser.image, email: currentUser.email, name: currentUser.name, role: currentRole }
 
@@ -132,9 +131,10 @@ const ManageUsers = () => {
                                     <td>
                                         {/* <button onClick={()=>handleUpdateRole(user)} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button> */}
 
-                                        <div onClick={() => handleUpdate(user)}>
+                                       {user?.role === 'admin'? 'admin' :  
+                                       <div onClick={() => handleUpdate(user)}>
                                             <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-ghost text-lg border-red-200 bg-orange-200"><FaEdit /></button>
-                                        </div> 
+                                        </div> }
                                     </td>
                                     <td>
                                         <button onClick={() => handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
