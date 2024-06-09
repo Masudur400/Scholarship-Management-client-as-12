@@ -24,7 +24,8 @@ const MyReviews = () => {
     }
 
 
-    const date = new Date(currentReview?.reviewDate)
+    const date = new Date( currentReview?.reviewDate)
+    
     const formattedDateOnly = date.toLocaleDateString()
     const formattedDate = date.toLocaleString();
 
@@ -137,7 +138,7 @@ const MyReviews = () => {
                                 <td> {review?.universityName} </td>
                                 <td> {review?.reviewerComments}</td>
                                 <td className='text-center'> {review?.ratingPoint}</td>
-                                <td className='text-center'> {review?.formattedDateOnly}</td>
+                                <td className='text-center'> {new Date(review?.reviewDate)?.toLocaleDateString()}</td>
 
 
                                 <td className='justify-between flex  gap-2'>
