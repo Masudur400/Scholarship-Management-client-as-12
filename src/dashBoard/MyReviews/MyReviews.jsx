@@ -1,7 +1,6 @@
 import { FaEdit } from "react-icons/fa";
 import useReviews from "../../components/Hooks/useReviews";
-import Loading from "../../components/Loading/Loading";
-import MyReviewsDesign from "./MyReviewsDesign";
+import Loading from "../../components/Loading/Loading"; 
 import { MdOutlineDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
@@ -17,15 +16,14 @@ const MyReviews = () => {
 
     const axiosSecure = useAxiosSecure()
     const [myReviews, refetch, loading, isPending] = useReviews()
-    const [currentReview, setCurrentReview] = useState()
+    const [currentReview, setCurrentReview] = useState({})
 
     const handleReviewData = review => {
         setCurrentReview(review)
     }
 
 
-    const date = new Date( currentReview?.reviewDate)
-    
+    const date = new Date() 
     const formattedDateOnly = date.toLocaleDateString()
     const formattedDate = date.toLocaleString();
 
