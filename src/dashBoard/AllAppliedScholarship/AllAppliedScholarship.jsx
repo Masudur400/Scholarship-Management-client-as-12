@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
-import AllApplicationRow from "./AllApplicationRow";
+import useAxiosSecure from "../../components/Hooks/useAxiosSecure"; 
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
