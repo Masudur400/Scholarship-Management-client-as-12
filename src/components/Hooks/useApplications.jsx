@@ -11,7 +11,7 @@ const useApplications = () => {
     const { data: applications = [], refetch, isPending} = useQuery({
         queryKey: ['applies', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/applies?email=${user?.email}`)
+            const res = await axiosSecure.get(`/applies/app?email=${user?.email}`)
             return res.data
         }
     })
