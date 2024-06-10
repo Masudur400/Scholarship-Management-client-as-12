@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet";
 import Carosel from "../Slider/Carosel";
 import MostRankingScholarship from "../MostRankingScholarship/MostRankingScholarship"; 
+import ReviewSection from "./ReviewSection";
 
 
 const Home = () => {
@@ -16,7 +17,9 @@ const Home = () => {
             <div>
                 <MostRankingScholarship></MostRankingScholarship>
             </div>
-             
+             <div>
+                <ReviewSection></ReviewSection>
+             </div>
         </div>
     );
 };

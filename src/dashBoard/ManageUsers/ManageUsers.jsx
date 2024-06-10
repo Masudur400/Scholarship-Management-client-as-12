@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
+import { FcDeleteDatabase } from "react-icons/fc";
 
 
 const ManageUsers = () => {
@@ -139,7 +140,7 @@ const ManageUsers = () => {
                                                 </div>}
                                         </td>
                                         <td>
-                                            <button onClick={() => handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
+                                           {user?.role === 'admin' ? <button className="btn btn-ghost text-xl   border-red-200  "><FcDeleteDatabase></FcDeleteDatabase> </button> : <button onClick={() => handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>}
                                         </td>
                                     </tr>) : ''
                             }

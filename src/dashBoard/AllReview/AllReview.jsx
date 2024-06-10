@@ -10,7 +10,7 @@ const AllReview = () => {
     const { data: reviews = [], refetch } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
-            const res = await axiosSecure.get('reviews')
+            const res = await axiosSecure.get('/reviews')
             return res.data
         }
     })

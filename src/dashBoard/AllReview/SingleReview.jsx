@@ -7,13 +7,13 @@ import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
 
 
 const SingleReview = ({ review ,refetch}) => {
-    const { _id,reviewerName, reviewerEmail, universityName, ratingPoint, scholarshipName, universityImage, reviewerComments, reviewerImage, reviewDate } = review
+    const {  reviewerName, reviewerEmail, universityName, ratingPoint, scholarshipName, universityImage, reviewerComments, reviewerImage, reviewDate } = review
 
     const parseRating = parseInt(ratingPoint)
 
     const date = new Date(reviewDate)
     const formattedDateOnly = date.toLocaleDateString()
-    const formattedDate = date.toLocaleString();
+    // const formattedDate = date.toLocaleString();
 
     const axiosSecure = useAxiosSecure()
 

@@ -3,18 +3,20 @@ import useAdmin from "../components/Hooks/useAdmin";
 import useAuth from "../components/Hooks/useAuth";
 import Loading from "../components/Loading/Loading";
 import PropTypes from 'prop-types'
+import useModerator from "../components/Hooks/useModerator";
 
  
 const AdminRoute = ({children}) => {
-    const [isAdmin , isPending] = useAdmin()
+    const [isAdmin , isAdminLoading] = useAdmin()
+    const [isModerator, isModeratorLoading] = useModerator()
     const {user, loading} = useAuth();
     const location = useLocation();
 
-    if (loading || isPending) {
+    if (loading || isAdminLoading || isModeratorLoading) {
         return  <Loading></Loading>
     }
 
-    if(user && isAdmin) {
+    if(user && isAdmin || isModerator) {
         return children;
     }
 
@@ -22,7 +24,7 @@ const AdminRoute = ({children}) => {
 };
 
 AdminRoute.propTypes ={
-    children:PropTypes.children
+    children:PropTypes.node
 }
 
 export default AdminRoute;

@@ -38,6 +38,9 @@ import MyReviews from './dashBoard/MyReviews/MyReviews';
 import AllReview from './dashBoard/AllReview/AllReview';
 import AllAppliedScholarship from './dashBoard/AllAppliedScholarship/AllAppliedScholarship';
 import Details from './dashBoard/AllAppliedScholarship/Details';
+import PrivetRoute from './SecureRoute/PrivetRoute';
+import AdminRoute from './SecureRoute/AdminRoute'; 
+import OnlyAdminRoute from './SecureRoute/OnlyAdminRoute';
 
 
 const router = createBrowserRouter([
@@ -60,19 +63,19 @@ const router = createBrowserRouter([
       },
       {
         path:'/allScholarShip',
-        element:<AllScolarShip></AllScolarShip>
+        element:<PrivetRoute><AllScolarShip></AllScolarShip></PrivetRoute>
       },
       {
         path:'/profile',
-        element:<Profile></Profile>
+        element:<PrivetRoute><Profile></Profile></PrivetRoute>
       },
       {
         path:'/updateProfile',
-        element:<UpdateProfile></UpdateProfile>
+        element:<PrivetRoute><UpdateProfile></UpdateProfile></PrivetRoute>
       },
       {
         path:'/scholarship/:id',
-        element:<ScholarshipDetails></ScholarshipDetails> ,
+        element:<PrivetRoute><ScholarshipDetails></ScholarshipDetails></PrivetRoute> ,
         // loader:({params})=> fetch(`http://localhost:5000/scholarship/${params.id}`)
       },
       
@@ -81,75 +84,83 @@ const router = createBrowserRouter([
   },
   {
     path:'dashboard',
-    element:<DashBoard></DashBoard>,
+    element: <DashBoard></DashBoard> ,
     children:[
       
       {
         path:'dashboardProfile',
-        element:<DashBoardProfile></DashBoardProfile>
+        element: <DashBoardProfile></DashBoardProfile> 
       },
       // admin routes 
       {
         path: 'users',
-        element:<ManageUsers></ManageUsers>
+        element:<OnlyAdminRoute><ManageUsers></ManageUsers></OnlyAdminRoute> 
       },
       {
         path:'addScholarship',
-        element:<AddScholarShip></AddScholarShip>
+        element: <AdminRoute><AddScholarShip></AddScholarShip></AdminRoute> 
       },
       {
         path:'manageScholarship',
-        element:<ManageScholarship></ManageScholarship>
+        element:<AdminRoute><ManageScholarship></ManageScholarship></AdminRoute> 
       },
       {
         path:'update/:id',
-        element:<UpdateScholarship></UpdateScholarship>,
+        element: <AdminRoute><UpdateScholarship></UpdateScholarship></AdminRoute>
+           
         // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'apply/:id',
-        element:<Apply></Apply>,
+        element: <PrivetRoute><Apply></Apply></PrivetRoute>
+         
         // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'payment/:id',
-        element:<Payment></Payment>,
+        element:  <PrivetRoute><Payment></Payment></PrivetRoute>
+         ,
         // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'manageScholarshipDetails/:id',
-        element:<ManageScholarshipDetails></ManageScholarshipDetails>,
+        element:<AdminRoute><ManageScholarshipDetails></ManageScholarshipDetails></AdminRoute>
+           
         // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'myApplication',
-        element:<MyApplycation></MyApplycation>
+        element:<PrivetRoute><MyApplycation></MyApplycation></PrivetRoute>
+         
       },
       {
         path:'myApplicationDetails/:id',
-        element:<MyApplicationDetails></MyApplicationDetails>,
+        element: <PrivetRoute><MyApplicationDetails></MyApplicationDetails></PrivetRoute>
+        
         // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       },
       {
         path:'editApplication/:id',
-        element:<EditApplication></EditApplication>,
+        element: <PrivetRoute><EditApplication></EditApplication></PrivetRoute>
+         
         // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       }, 
       {
         path:'myReviews',
-        element:<MyReviews></MyReviews>
+        element: <PrivetRoute><MyReviews></MyReviews></PrivetRoute> 
       },
       {
         path:'allReview',
-        element:<AllReview></AllReview>
+        element:  <AdminRoute><AllReview></AllReview> </AdminRoute>
       },
       {
         path:'allAppliedScholarship',
-        element:<AllAppliedScholarship></AllAppliedScholarship>
+        element: <AdminRoute><AllAppliedScholarship></AllAppliedScholarship></AdminRoute>
+          
       },
       {
         path:'details/:id',
-        element:<Details></Details>,
+        element:<AdminRoute><Details></Details></AdminRoute>,
         // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       } 
 
@@ -161,11 +172,10 @@ const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode> 
-     <AuthProvider>
+     <AuthProvider> 
      <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />
     </QueryClientProvider> 
-    </AuthProvider>
-    
+    </AuthProvider> 
   </React.StrictMode>,
 )
