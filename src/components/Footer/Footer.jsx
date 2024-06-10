@@ -1,4 +1,4 @@
-import { FaFacebookSquare } from "react-icons/fa";
+import { FaFacebookSquare, FaWhatsappSquare } from "react-icons/fa";
 import { IoLogoTwitter, IoLogoYoutube } from "react-icons/io";
 
 const Footer = () => {
@@ -15,9 +15,10 @@ const Footer = () => {
                 <nav>
                     <h6 className="footer-title">Social</h6>
                     <div className="grid grid-flow-col gap-4">
-                        <a href="" className="text-3xl  text-sky-700"> <IoLogoTwitter></IoLogoTwitter></a>
-                        <a href=""  className="text-3xl text-red-600"> <IoLogoYoutube></IoLogoYoutube></a>
-                        <a href="" className="text-3xl text-blue-600"> <FaFacebookSquare></FaFacebookSquare></a>
+                        <a href="" target="_blank" className="text-3xl  text-sky-700"> <IoLogoTwitter></IoLogoTwitter></a>
+                        <a href="" target="_blank"  className="text-3xl text-red-600"> <IoLogoYoutube></IoLogoYoutube></a>
+                        <a href="" target="_blank" className="text-3xl text-blue-600"> <FaFacebookSquare></FaFacebookSquare></a>
+                        {/* <a href="" target="_blank" className="text-3xl text-green-600"> <FaWhatsappSquare></FaWhatsappSquare></a> */}
                     </div>
                 </nav>
                 <nav>
