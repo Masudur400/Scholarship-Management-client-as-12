@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Link,   useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";  
 import { useQuery } from "@tanstack/react-query";
@@ -27,7 +27,7 @@ const EditApplication = () => {
         }
     })
 
-    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate,feedBack }  = scholar
+    const { _id, applicantPhoneNumber,  applicantUniversityName, applicantAddress, applicantName,  applicantScholarshipCategory, gender,  applicantSubjectCategory, applicantDegree, SSCresult, HSCresult,  status, applicantImage,  feedBack }  = scholar
 
     const updateApplication = async(e) =>{
         e.preventDefault() 

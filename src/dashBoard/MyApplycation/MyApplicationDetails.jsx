@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineDeleteForever } from "react-icons/md";
-import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Link,  useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,10 +25,10 @@ const MyApplicationDetails = () => {
         }
     })
 
-    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate } = scholar
+    const { _id, applicantPhoneNumber, applicationFees, serviceCharge,   applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult,   status, applicantImage, applicantDate } = scholar
 
     const date = new Date(applicantDate)
-    const formattedDateOnly = date.toLocaleDateString()
+    // const formattedDateOnly = date.toLocaleDateString()
     const formattedDate = date.toLocaleString();
 
     const handleDeleteApplication = scholar => {

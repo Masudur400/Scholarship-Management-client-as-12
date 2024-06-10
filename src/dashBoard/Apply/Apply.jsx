@@ -1,9 +1,8 @@
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import {   useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
-import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
-import { useState } from "react"; 
+import useAxiosSecure from "../../components/Hooks/useAxiosSecure"; 
 import Swal from "sweetalert2";
 import Loading from "../../components/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
@@ -15,9 +14,8 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const Apply = () => {
 
-    // const applyShip = useLoaderData()
-    const navigate = useNavigate()
-    const [phoneNumberError, setPhoneNumberError] = useState('')  
+   
+    const navigate = useNavigate()   
 
     const {id} = useParams()
 
@@ -30,7 +28,7 @@ const Apply = () => {
     })
 
 
-    const { _id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
+    const { _id,   scholarshipName, universityCity, universityCountry, universityName,   subjectCategory, scholarshipCategory, applicationFees, serviceCharge, image } = applyShip
 
     const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure()
@@ -52,14 +50,7 @@ const Apply = () => {
         const userName = user?.displayName
         const imageFile = form.get('image');
 
-        // if (applicantPhoneNumber != 11) {
-        //     return  setPhoneNumberError('phone number will be equal 11 ') 
-        // } 
-        // else if(!applicantPhoneNumber > 10){
-        //     setPhoneNumberError('phone number will be equal 11 ')
-        //     return
-        // }
-        // setPhoneNumberError('')
+         
 
         try {
             const imageData = new FormData();
@@ -143,7 +134,7 @@ const Apply = () => {
                         <div>
                             <p>Applicant phone number</p>
                             <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="number" name="applicantPhoneNumber" placeholder="Applicant phone number" id="applicantPhoneNumber" required />
-                            {phoneNumberError && <p className="text-red-500">{phoneNumberError}</p>}
+                             
                         </div>
                         <div>
                             <p>University Name</p>

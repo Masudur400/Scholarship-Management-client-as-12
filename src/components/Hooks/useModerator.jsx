@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
-import useAxiosSecure from "./useAxiosSecure";
-import useAxiosPublic from "./useAxiosPublic";
-
+import useAxiosSecure from "./useAxiosSecure"; 
  
 const useModerator = () => { 
 
     const {user, loading} = useAuth();
-    const axiosPublic = useAxiosPublic();
+     
     const axiosSecure = useAxiosSecure()
     const {data : isModerator, isPending : isModeratorLoading} = useQuery({
         queryKey : [user?.email, "isModerator"],

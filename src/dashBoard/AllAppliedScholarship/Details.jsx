@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
-import { Link, useLoaderData, useParams } from "react-router-dom"; 
+import { Link,useParams } from "react-router-dom"; 
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
+import Loading from "../../components/Loading/Loading";
 
 
 const Details = () => {
@@ -19,12 +20,15 @@ const Details = () => {
         }
     })
 
-    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate } = scholar
+    const {  applicantPhoneNumber, applicationFees, serviceCharge, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult,   status, applicantImage, applicantDate } = scholar
 
     const date = new Date(applicantDate)
-    const formattedDateOnly = date.toLocaleDateString()
+    // const formattedDateOnly = date.toLocaleDateString()
     const formattedDate = date.toLocaleString();  
 
+    if(isPending){
+        return <Loading></Loading>
+    }
 
     return (
         <div> 

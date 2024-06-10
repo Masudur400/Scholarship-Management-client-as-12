@@ -24,9 +24,9 @@ const MyReviews = () => {
     }
 
 
-    const date = new Date() 
-    const formattedDateOnly = date.toLocaleDateString()
-    const formattedDate = date.toLocaleString();
+    // const date = new Date() 
+    // const formattedDateOnly = date.toLocaleDateString()
+    // const formattedDate = date.toLocaleString();
 
     const handleEditReview = async(e) =>{
         e.preventDefault() 

@@ -1,13 +1,11 @@
-import { Link, useLoaderData, useParams } from "react-router-dom"; 
+import { Link,   useParams } from "react-router-dom"; 
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading/Loading";
 
  
-const ManageScholarshipDetails = () => { 
-
-    
-    // const scholarShips = useLoaderData() 
+const ManageScholarshipDetails = () => {  
+     
     const axiosSecure = useAxiosSecure()
 
     const {id} = useParams()
@@ -26,7 +24,7 @@ const ManageScholarshipDetails = () => {
     if(isPending){
         return <Loading></Loading>
     }
-    // console.log(details)
+     
     return (
         <div className="shadow-lg p-4 md:flex gap-6  ">
         <div className="flex justify-center mb-3">

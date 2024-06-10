@@ -1,7 +1,7 @@
  
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { useLoaderData, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
