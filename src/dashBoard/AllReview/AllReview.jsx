@@ -23,7 +23,8 @@ const AllReview = () => {
             <div className="md:w-1/5 mx-auto border border-yellow-500 my-2"></div>
             <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-3">
             {
-                reviews.map(review => <SingleReview key={review._id} review={review} refetch={refetch}></SingleReview>)
+                Array.isArray(reviews) && reviews.length > 0 ? 
+                reviews.map(review => <SingleReview key={review._id} review={review} refetch={refetch}></SingleReview>) :''
             }
             </div>
         </div>

@@ -137,7 +137,8 @@ const AllAppliedScholarship = () => {
                     <tbody>
 
                         {
-                            allApplies.map((apply, idx) => <tr key={apply._id} className='hover:shadow-md'>
+                            Array.isArray(allApplies) && allApplies.length > 0 ?
+                            allApplies?.map((apply, idx) => <tr key={apply._id} className='hover:shadow-md'>
                                 <td> {idx + 1} </td>
                                 <td> University Name: {apply?.applicantUniversityName} </td>
                                 <td>
@@ -178,7 +179,7 @@ const AllAppliedScholarship = () => {
                                         className=" px-4 py-2 rounded-md  text-white bg-yellow-500 hover:bg-yellow-600">Cancel</button>
 
                                 </td>
-                            </tr>)
+                            </tr>): ''
                         }
 
                     </tbody>

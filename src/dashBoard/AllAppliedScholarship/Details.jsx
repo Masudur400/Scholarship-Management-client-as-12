@@ -1,12 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
-import { Link, useLoaderData } from "react-router-dom"; 
+import { Link, useLoaderData, useParams } from "react-router-dom"; 
+import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 
 
 const Details = () => {
 
-    const details = useLoaderData() 
+    // const details = useLoaderData() 
 
-    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate } = details
+    const axiosSecure = useAxiosSecure()
+
+    const {id} = useParams()
+    const { data: scholar={}, isPending} = useQuery({
+        queryKey: ['applies'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/applies/${id}`) 
+            return res.data
+        }
+    })
+
+    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate } = scholar
 
     const date = new Date(applicantDate)
     const formattedDateOnly = date.toLocaleDateString()

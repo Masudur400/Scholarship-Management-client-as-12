@@ -62,7 +62,7 @@ const ManageUsers = () => {
 
     const handleUpdateRole = async e => {
         e.preventDefault()
-        const currentRole = e.target.role.value 
+        const currentRole = e.target.role.value
 
         const data = { image: currentUser.image, email: currentUser.email, name: currentUser.name, role: currentRole }
 
@@ -79,7 +79,7 @@ const ManageUsers = () => {
         }
     }
 
-    if(isPending){
+    if (isPending) {
         return <Loading></Loading>
     }
 
@@ -110,36 +110,38 @@ const ManageUsers = () => {
                         <tbody className="">
 
                             {
-                                users.map((user, idx) => <tr key={user._id} className="hover:shadow-md">
-                                    <td>
-                                        {idx+1}
-                                    </td>
-                                    <td>
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={user?.image} alt="Avatar Tailwind CSS Component" />
-                                            </div>
-                                        </div>
-                                    </td> 
-                                    <td>
-                                        {user?.name}
-                                    </td>
-                                    <td>{user?.email}</td>
-                                    <td>
-                                        {user?.role}
-                                    </td>
-                                    <td>
-                                        {/* <button onClick={()=>handleUpdateRole(user)} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button> */}
 
-                                       {user?.role === 'admin'? 'admin' :  
-                                       <div onClick={() => handleUpdate(user)}>
-                                            <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-ghost text-lg border-red-200 bg-orange-200"><FaEdit /></button>
-                                        </div> }
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
-                                    </td> 
-                                </tr>)
+                                Array.isArray(users) && users.length > 0 ?
+                                    users.map((user, idx) => <tr key={user._id} className="hover:shadow-md">
+                                        <td>
+                                            {idx + 1}
+                                        </td>
+                                        <td>
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={user?.image} alt="Avatar Tailwind CSS Component" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {user?.name}
+                                        </td>
+                                        <td>{user?.email}</td>
+                                        <td>
+                                            {user?.role}
+                                        </td>
+                                        <td>
+                                            {/* <button onClick={()=>handleUpdateRole(user)} className="btn btn-ghost text-lg   border-red-200 bg-orange-200"><FaEdit /> </button> */}
+
+                                            {user?.role === 'admin' ? 'admin' :
+                                                <div onClick={() => handleUpdate(user)}>
+                                                    <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn btn-ghost text-lg border-red-200 bg-orange-200"><FaEdit /></button>
+                                                </div>}
+                                        </td>
+                                        <td>
+                                            <button onClick={() => handleDelete(user)} className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdDelete /> </button>
+                                        </td>
+                                    </tr>) : ''
                             }
 
 

@@ -1,13 +1,31 @@
-import { Link, useLoaderData } from "react-router-dom"; 
+import { Link, useLoaderData, useParams } from "react-router-dom"; 
+import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/Loading/Loading";
 
  
 const ManageScholarshipDetails = () => { 
 
     
-    const scholarShips = useLoaderData() 
+    // const scholarShips = useLoaderData() 
+    const axiosSecure = useAxiosSecure()
+
+    const {id} = useParams()
+
+    const { data: scholarShips={}, isPending} = useQuery({
+        queryKey: ['scholarships'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/scholarships/${id}`) 
+            return res.data
+        }
+    }) 
     
 
     const {postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory,  scholarshipCategory, degree, applicationFees, serviceCharge, image} = scholarShips 
+
+    if(isPending){
+        return <Loading></Loading>
+    }
     // console.log(details)
     return (
         <div className="shadow-lg p-4 md:flex gap-6  ">

@@ -40,7 +40,8 @@ const MostRankingScholarship = () => {
              </div>
             <div className="my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
              {
-                sortedTopRankingScholarship?.map(scholarship => <SingleScholarship key={scholarship._id} scholarship={scholarship}></SingleScholarship>)
+              Array.isArray(sortedTopRankingScholarship) && sortedTopRankingScholarship.length > 0 ?
+                sortedTopRankingScholarship?.map(scholarship => <SingleScholarship key={scholarship._id} scholarship={scholarship}></SingleScholarship>) : ''
              }
         </div>
         </div>

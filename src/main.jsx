@@ -73,7 +73,7 @@ const router = createBrowserRouter([
       {
         path:'/scholarship/:id',
         element:<ScholarshipDetails></ScholarshipDetails> ,
-        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`http://localhost:5000/scholarship/${params.id}`)
       },
       
       
@@ -104,22 +104,22 @@ const router = createBrowserRouter([
       {
         path:'update/:id',
         element:<UpdateScholarship></UpdateScholarship>,
-        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'apply/:id',
         element:<Apply></Apply>,
-        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'payment/:id',
         element:<Payment></Payment>,
-        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'manageScholarshipDetails/:id',
         element:<ManageScholarshipDetails></ManageScholarshipDetails>,
-        loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
       },
       {
         path:'myApplication',
@@ -128,12 +128,12 @@ const router = createBrowserRouter([
       {
         path:'myApplicationDetails/:id',
         element:<MyApplicationDetails></MyApplicationDetails>,
-        loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+        // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       },
       {
         path:'editApplication/:id',
         element:<EditApplication></EditApplication>,
-        loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+        // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
       }, 
       {
         path:'myReviews',
@@ -150,11 +150,8 @@ const router = createBrowserRouter([
       {
         path:'details/:id',
         element:<Details></Details>,
-        loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
-      }
-      
-
-// moderator routes 
+        // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+      } 
 
     ]
   }

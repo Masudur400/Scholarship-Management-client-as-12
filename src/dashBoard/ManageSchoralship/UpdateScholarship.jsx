@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { FaArrowLeft } from "react-icons/fa";
 import Loading from "../../components/Loading/Loading";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -20,7 +21,16 @@ const UpdateScholarship = () => {
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
 
-    const scholarship = useLoaderData()
+    // const scholarship = useLoaderData()
+    const {id} = useParams()
+
+    const { data: scholar={}, isPending} = useQuery({
+        queryKey: ['scholarships'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/scholarships/${id}`) 
+            return res.data
+        }
+    })
 
     const { _id,
         postDate,
@@ -37,7 +47,7 @@ const UpdateScholarship = () => {
         applicationFees,
         serviceCharge,
         image,
-    } = scholarship
+    } = scholar
 
     const handleUpdateScholarship = async (e) => {
         e.preventDefault()
@@ -106,7 +116,7 @@ const UpdateScholarship = () => {
         }
     }
 
-    if(loading){
+    if(loading || isPending){
         return <Loading></Loading>
     }
 

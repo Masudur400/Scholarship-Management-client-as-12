@@ -3,19 +3,21 @@ import { NavLink } from "react-router-dom";
 import useAdmin from "../../components/Hooks/useAdmin";
 import useModerator from "../../components/Hooks/useModerator";
 import { CgProfile } from "react-icons/cg";
-import { MdAssignmentAdd, MdOutlineRateReview, MdOutlineSettingsApplications } from "react-icons/md";
+import { MdAssignmentAdd, MdOutlineRateReview } from "react-icons/md";
 import { VscPreview } from "react-icons/vsc";
 import { FiUsers } from "react-icons/fi";
+import Loading from "../../components/Loading/Loading";
+import { IoNewspaperSharp } from "react-icons/io5";
 
 const DashBoardNav = () => {
 
-    const [isAdmin] = useAdmin()
-    const [isModerator] = useModerator()
-    console.log(isModerator)
-    console.log(isAdmin)
+    const [isAdmin ,isAdminLoading] = useAdmin()
+    const [isModerator ,isModeratorLoading] = useModerator()
+     
 
-
-    //  {isAdmin?(admin rout) : ismoderator ? (moderrout)  : userrout}
+    if(isAdminLoading || isModeratorLoading){
+        return <Loading></Loading>
+    }
 
 
     const links = <>
@@ -54,36 +56,12 @@ const DashBoardNav = () => {
                 :
                 <>
 
-                    <li><NavLink to="/dashboard/myApplication" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none flex gap-1 items-center justify-center' : 'flex gap-1 items-center justify-center'} ><MdOutlineSettingsApplications className="text-xl"></MdOutlineSettingsApplications>  My Application</NavLink></li>
+                    <li><NavLink to="/dashboard/myApplication" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none flex gap-1 items-center justify-center' : 'flex gap-1 items-center justify-center'} > <IoNewspaperSharp className="text-xl"></IoNewspaperSharp>  My Application</NavLink></li>
 
                     <li><NavLink to="/dashboard/myReviews" className={({ isActive }) => isActive ? '  text-white underline bg-yellow-500 hover:bg-yellow-400 md:font-bold btn btn-sm border-none flex gap-1 items-center justify-center' : 'flex gap-1 items-center justify-center'} ><MdOutlineRateReview className="text-xl"></MdOutlineRateReview>  My Reviews</NavLink></li>
 
-                </>}
-
-
-
-
-        {/* Admin rout  */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {/* moderator rout */}
-
-        {/* user rout  */}
+                </>} 
+ 
     </>
 
     return (

@@ -1,11 +1,12 @@
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../components/Hooks/useAuth";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";
 import { useState } from "react"; 
 import Swal from "sweetalert2";
 import Loading from "../../components/Loading/Loading";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -14,9 +15,21 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const Apply = () => {
 
-    const applyShip = useLoaderData()
+    // const applyShip = useLoaderData()
     const navigate = useNavigate()
-    const [phoneNumberError, setPhoneNumberError] = useState('')
+    const [phoneNumberError, setPhoneNumberError] = useState('')  
+
+    const {id} = useParams()
+
+    const { data: applyShip={}, isPending} = useQuery({
+        queryKey: ['scholarships'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/scholarships/${id}`) 
+            return res.data
+        }
+    })
+
+
     const { _id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = applyShip
 
     const { user, loading } = useAuth();
@@ -108,7 +121,7 @@ const Apply = () => {
         }
     };
 
-    if(loading){
+    if(loading || isPending){
         return <Loading></Loading>
     }
 

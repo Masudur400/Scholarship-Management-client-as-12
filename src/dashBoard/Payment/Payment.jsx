@@ -1,8 +1,11 @@
  
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
+import Loading from '../../components/Loading/Loading';
 
 
 
@@ -10,13 +13,27 @@ const stripePromise = loadStripe(import.meta.env.VITE_pk)
 
 const Payment = () => {
 
-    const payment = useLoaderData()
+    // const payment = useLoaderData()
+    const axiosSecure = useAxiosSecure()
+
+    const {id} = useParams()
+
+    const { data: payment={}, isPending} = useQuery({
+        queryKey: ['scholarships'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/scholarships/${id}`) 
+            return res.data
+        }
+    })
      
     const {_id, applicationFees, serviceCharge} = payment 
      
 
     const totalFee = parseFloat(applicationFees) + parseFloat(serviceCharge) 
- 
+
+    if(isPending){
+        return <Loading></Loading>
+    }
 
     return (
         <div>

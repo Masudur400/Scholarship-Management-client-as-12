@@ -1,9 +1,11 @@
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../components/Hooks/useAxiosSecure";  
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/Loading/Loading";
 
  
 
@@ -12,10 +14,20 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const EditApplication = () => {
 
-    const application = useLoaderData()
+    // const application = useLoaderData()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate,feedBack }  = application
+
+    const {id} = useParams()
+    const { data: scholar={}, isPending} = useQuery({
+        queryKey: ['applies'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/applies/${id}`) 
+            return res.data
+        }
+    })
+
+    const { _id, applicantPhoneNumber, applicationFees, serviceCharge, totalFee, applicantUniversityName, applicantAddress, applicantName, scholarshipName, applicantScholarshipCategory, gender, universityCity, universityCountry, universityImage, applicantSubjectCategory, applicantDegree, SSCresult, HSCresult, UserEmail, userName, status, applicantImage, applicantDate,feedBack }  = scholar
 
     const updateApplication = async(e) =>{
         e.preventDefault() 
@@ -64,6 +76,10 @@ const EditApplication = () => {
             console.error('Error uploading the image or submitting the form:', error);
         } 
     } 
+
+    if(isPending){
+        return <Loading></Loading>
+    }
 
     return (
         <div className="my-10 mx-5">  

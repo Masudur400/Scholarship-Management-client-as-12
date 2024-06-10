@@ -17,6 +17,7 @@ const MyReviews = () => {
     const axiosSecure = useAxiosSecure()
     const [myReviews, refetch, loading, isPending] = useReviews()
     const [currentReview, setCurrentReview] = useState({})
+    const [revErr, setRevErr] = useState('')
 
     const handleReviewData = review => {
         setCurrentReview(review)
@@ -37,6 +38,11 @@ const MyReviews = () => {
         const ratingPoint = form.get('ratingPoint')
         const reviewerComments = form.get('reviewerComments')
         const imageFile = form.get('image');
+
+        if(parseInt(ratingPoint) > 5 || parseInt(ratingPoint) < 1){
+            return setRevErr('rating point will be 1-5')
+        }
+        setRevErr('')
 
         try {
             const imageData = new FormData();
@@ -128,6 +134,7 @@ const MyReviews = () => {
                     <tbody>
 
                         {
+                            Array.isArray(myReviews) && myReviews.length > 0 ?
                             myReviews.map((review, idx) => <tr key={review._id} className='hover:shadow-md '>
                                 <td> {idx + 1} </td>
                                 <td>  <img className='h-12 w-12 rounded-md' src={review?.universityImage} alt="" /> </td>
@@ -151,7 +158,7 @@ const MyReviews = () => {
                                             className="btn btn-ghost text-lg text-red-500 border-red-200 bg-orange-200"><MdOutlineDeleteForever /> </button>
                                     </div>
                                 </td>
-                            </tr>)
+                            </tr>) :''
                         }
 
                     </tbody>
@@ -170,6 +177,7 @@ const MyReviews = () => {
                         <div>
                             <p>Rating point</p>
                             <input className="border-2 rounded-md w-full px-4 py-2 mb-2" type="text" defaultValue={currentReview?.ratingPoint} name="ratingPoint" placeholder="Rating point" id="" />
+                            {revErr && <p className="text-red-500">{revErr}</p>}
                         </div>
                         {/* {ratingPointError && <p className="text-red-500">{ratingPointError}</p>} */}
                         <div>

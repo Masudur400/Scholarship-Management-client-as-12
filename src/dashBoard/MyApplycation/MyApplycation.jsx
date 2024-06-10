@@ -33,7 +33,8 @@ const MyApplycation = () => {
                     <tbody>
                         
                        {
-                        applications.map((application, idx) => <MyApplicationDesign key={application._id} application={application} idx={idx}></MyApplicationDesign>)
+                        Array.isArray(applications) && applications.length > 0 ?
+                        applications.map((application, idx) => <MyApplicationDesign key={application._id} application={application} idx={idx}></MyApplicationDesign>): ''
                        }
                         
                     </tbody>

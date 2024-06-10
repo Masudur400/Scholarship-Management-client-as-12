@@ -1,5 +1,5 @@
 
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import useAuth from "../Hooks/useAuth"; 
 import Swal from "sweetalert2";
 import Loading from "../Loading/Loading";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -17,14 +18,23 @@ const ScholarshipDetails = () => {
 
     const { user, loading } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const scholarShips = useLoaderData()
+    // const scholarShips = useLoaderData()
+    const {id} = useParams()
     const navigate = useNavigate()
     const [ratingPointError, setRatingPointError] = useState('') 
 
+    const { data: scholar={}, isPending} = useQuery({
+        queryKey: ['scholarships'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/scholarships/${id}`) 
+            return res.data
+        }
+    })
 
-    const { _id, postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = scholarShips
+
+    const { _id, postDate, applicationDeadline, postedUserEmail, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = scholar
     // console.log(details)
-
+    // http://localhost:5173/dashboard/myReviews
 
     const handleReview = async (e) => {
         e.preventDefault()
@@ -35,7 +45,7 @@ const ScholarshipDetails = () => {
         const imageFile = form.get('image');
          
 
-        if (ratingPoint > 5) {
+        if (parseInt(ratingPoint) > 5 || parseInt(ratingPoint) < 1) {
             setRatingPointError('rating will be number of 1-5')
             return
         }
@@ -58,7 +68,7 @@ const ScholarshipDetails = () => {
                 reviewerName,
                 reviewerEmail: user?.email,
                 universityName,
-                ratingPoint,
+                 ratingPoint,
                 scholarshipName,
                 universityImage: image,
                 reviewerComments,
@@ -87,7 +97,7 @@ const ScholarshipDetails = () => {
         document.getElementById("my_modal_5").close();
     }
 
-    if(loading){
+    if(loading || isPending){
         return <Loading></Loading>
     }
 
