@@ -19,8 +19,10 @@ const MostRankingScholarship = () => {
     }) 
 
   useEffect(() => {
-    const sorted = scholarships?.sort((a, b) => a.universityWorldRank - b.universityWorldRank);
-    setSortedScholarship(sorted);
+     if(scholarships.length>0){ 
+       const sorted = scholarships?.sort((a, b) => a.universityWorldRank - b.universityWorldRank);
+       setSortedScholarship(sorted);
+     }
   }, [scholarships]);
 
   const sortedTopRankingScholarship = sortedScholarship?.slice(0,6)

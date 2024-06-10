@@ -3,11 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import { useState } from "react"; 
-import useAuth from "../Hooks/useAuth"; 
+import { useState } from "react";
+import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import Loading from "../Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -19,31 +21,48 @@ const ScholarshipDetails = () => {
     const { user, loading } = useAuth()
     const axiosSecure = useAxiosSecure()
     // const scholarShips = useLoaderData()
-    const {id} = useParams()
+    const { id } = useParams()
     const navigate = useNavigate()
-    const [ratingPointError, setRatingPointError] = useState('') 
+    const [ratingPointError, setRatingPointError] = useState('')
 
-    const { data: scholar={}, isPending} = useQuery({
+    // loade a scholarship  by id
+    const { data: scholar = {}, isPending } = useQuery({
         queryKey: ['scholarships'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/scholarships/${id}`) 
+            const res = await axiosSecure.get(`/scholarships/${id}`)
             return res.data
         }
     })
+
+    // loade all users 
+    const { data: users = [], refetch, isPending: userLoading } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users')
+            return res.data
+        }
+    })
+
+    const logedinUser = users.find(logedUser => logedUser.email === user?.email)
 
 
     const { _id, postDate, applicationDeadline, scholarshipName, universityCity, universityCountry, universityName, universityWorldRank, subjectCategory, scholarshipCategory, degree, applicationFees, serviceCharge, image } = scholar
     // console.log(details)
     // http://localhost:5173/dashboard/myReviews
 
+     
+
     const handleReview = async (e) => {
         e.preventDefault()
+
+        
+
         const form = new FormData(e.currentTarget);
         const reviewerName = form.get('reviewerName')
         const ratingPoint = form.get('ratingPoint')
         const reviewerComments = form.get('reviewerComments')
         const imageFile = form.get('image');
-         
+
 
         if (parseInt(ratingPoint) > 5 || parseInt(ratingPoint) < 1) {
             setRatingPointError('rating will be number of 1-5')
@@ -62,31 +81,31 @@ const ScholarshipDetails = () => {
             });
 
             const imageUrl = imageRes.data.data.url;
-            const date = new Date() 
+            const date = new Date()
 
             const data = {
                 reviewerName,
                 reviewerEmail: user?.email,
                 universityName,
-                 ratingPoint,
+                ratingPoint,
                 scholarshipName,
                 universityImage: image,
                 reviewerComments,
                 reviewerImage: imageUrl,
-                reviewDate:date
+                reviewDate: date
             };
 
             // const res = await axiosSecure.post('/reviews', data) 
             const res = await axiosSecure.post('reviews', data)
             console.log(res.data)
-            
+
             if (res.data.insertedId) {
-                
+
                 Swal.fire({
                     title: "success !",
                     text: `review accepted !`,
                     icon: "success"
-                }); 
+                });
                 navigate(`/dashboard/apply/${_id}`)
             }
 
@@ -97,13 +116,13 @@ const ScholarshipDetails = () => {
         document.getElementById("my_modal_5").close();
     }
 
-    if(loading || isPending){
+    if (loading || isPending || userLoading) {
         return <Loading></Loading>
     }
 
     return (
         <div>
-             
+            <ToastContainer></ToastContainer>
             <div className="shadow-lg p-4 md:flex gap-6  ">
                 <Helmet>
                     <title>SM || Scholarship Details</title>
@@ -131,7 +150,10 @@ const ScholarshipDetails = () => {
                     <p className="border-b-2 border-yellow-500 my-2"></p>
                     <div className=" flex justify-between">
 
-                          <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Apply Now</button> 
+                         
+                       {logedinUser?.role === 'admin' || logedinUser?.role === 'moderator'? '':
+                        <button onClick={() => document.getElementById('my_modal_5').showModal()} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md my-3 text-white font-bold">Apply Now</button>}
+                        
 
                         <Link to={-1}> <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md my-3 text-white font-bold">Back</button></Link>
                     </div>
@@ -168,8 +190,8 @@ const ScholarshipDetails = () => {
                         </div>
                     </div>
                     {/* <Link  to={`/dashboard/apply/${_id}`}>  */}
-                     <input type="submit" value='Next' className="btn -mt-12 bg-yellow-500 hover:bg-yellow-600 text-white font-bold absolute" />
-                     {/* </Link> */}
+                    <input type="submit" value='Next' className="btn -mt-12 bg-yellow-500 hover:bg-yellow-600 text-white font-bold absolute" />
+                    {/* </Link> */}
 
 
                 </form>

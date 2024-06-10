@@ -43,6 +43,8 @@ import AdminRoute from './SecureRoute/AdminRoute';
 import OnlyAdminRoute from './SecureRoute/OnlyAdminRoute';
 
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -76,7 +78,7 @@ const router = createBrowserRouter([
       {
         path:'/scholarship/:id',
         element:<PrivetRoute><ScholarshipDetails></ScholarshipDetails></PrivetRoute> ,
-        // loader:({params})=> fetch(`http://localhost:5000/scholarship/${params.id}`)
+        // loader:({params})=> fetch(`https://assignment-twelve-server-two.vercel.app/scholarship/${params.id}`)
       },
       
       
@@ -108,25 +110,25 @@ const router = createBrowserRouter([
         path:'update/:id',
         element: <AdminRoute><UpdateScholarship></UpdateScholarship></AdminRoute>
            
-        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`https://assignment-twelve-server-two.vercel.app/scholarships/${params.id}`)
       },
       {
         path:'apply/:id',
         element: <PrivetRoute><Apply></Apply></PrivetRoute>
          
-        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`https://assignment-twelve-server-two.vercel.app/scholarships/${params.id}`)
       },
       {
         path:'payment/:id',
         element:  <PrivetRoute><Payment></Payment></PrivetRoute>
          ,
-        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`https://assignment-twelve-server-two.vercel.app/scholarships/${params.id}`)
       },
       {
         path:'manageScholarshipDetails/:id',
         element:<AdminRoute><ManageScholarshipDetails></ManageScholarshipDetails></AdminRoute>
            
-        // loader:({params})=> fetch(`http://localhost:5000/scholarships/${params.id}`)
+        // loader:({params})=> fetch(`https://assignment-twelve-server-two.vercel.app/scholarships/${params.id}`)
       },
       {
         path:'myApplication',
@@ -137,13 +139,13 @@ const router = createBrowserRouter([
         path:'myApplicationDetails/:id',
         element: <PrivetRoute><MyApplicationDetails></MyApplicationDetails></PrivetRoute>
         
-        // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+        // loader:({params}) => fetch(`https://assignment-twelve-server-two.vercel.app/applies/${params.id}`)
       },
       {
         path:'editApplication/:id',
         element: <PrivetRoute><EditApplication></EditApplication></PrivetRoute>
          
-        // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+        // loader:({params}) => fetch(`https://assignment-twelve-server-two.vercel.app/applies/${params.id}`)
       }, 
       {
         path:'myReviews',
@@ -161,7 +163,7 @@ const router = createBrowserRouter([
       {
         path:'details/:id',
         element:<AdminRoute><Details></Details></AdminRoute>,
-        // loader:({params}) => fetch(`http://localhost:5000/applies/${params.id}`)
+        // loader:({params}) => fetch(`https://assignment-twelve-server-two.vercel.app/applies/${params.id}`)
       } 
 
     ]
@@ -173,9 +175,11 @@ const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode> 
      <AuthProvider> 
+      
      <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />
-    </QueryClientProvider> 
+    </QueryClientProvider>
+     
     </AuthProvider> 
   </React.StrictMode>,
 )

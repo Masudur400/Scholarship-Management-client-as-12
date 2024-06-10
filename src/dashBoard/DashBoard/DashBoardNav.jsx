@@ -81,8 +81,8 @@ const DashBoardNav = () => {
                     <h2 className="text-3xl text-center font-bold text-white md:hidden">dashboard</h2>
 
                 </div>
-                <div className="navbar-center hidden md:flex   md:max-w-full">
-                    <ul className="menu menu-horizontal px-1 font-bold text-white">
+                <div className="navbar-center hidden md:flex md:max-w-full">
+                    <ul className="menu menu-horizontal px-1  font-bold text-white text-left">
                         {links}
                     </ul>
                 </div>

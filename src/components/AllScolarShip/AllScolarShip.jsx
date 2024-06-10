@@ -20,7 +20,7 @@ const AllScolarShip = () => {
     });
 
     useEffect(() => {
-        console.log("Scholarships data: ", scholarshipsa);
+         
         if (query === '') {
             setFilteredData(scholarshipsa);
         } else {
@@ -38,8 +38,7 @@ const AllScolarShip = () => {
     const handleSearch = e => {
         e.preventDefault();
         const searchText = e.target.search.value.toLowerCase();
-        setQuery(searchText);
-        console.log("Search query: ", searchText);
+        setQuery(searchText); 
     }
 
     if (isPending) {
